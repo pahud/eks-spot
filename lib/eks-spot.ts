@@ -5,7 +5,6 @@ import * as iam from '@aws-cdk/aws-iam';
 import * as ec2 from '@aws-cdk/aws-ec2';
 import { LaunchTemplate } from './launch-template';
 
-
 const DEFAULT_INSTANCE_TYPE = 't3.large'
 
 export enum BlockDuration {
@@ -30,14 +29,9 @@ export enum ClusterVersion {
 }
 
 export interface EksSpotClusterProps extends StackProps {
-    // readonly cluster: eks.Cluster;
     readonly clusterAttributes?: eks.ClusterAttributes;
     readonly clusterVersion: ClusterVersion;
     readonly instanceRole?: iam.IRole;
-    // readonly defaultInstanceType: ec2.InstanceType;
-    // readonly minCapacity?: number;
-    // readonly maxCapacity?: number;
-    // readonly blockDuration?: BlockDuration;
     readonly instanceInterruptionBehavior?: InstanceInterruptionBehavior;
     readonly kubectlEnabled?: boolean;
 }
@@ -45,23 +39,14 @@ export interface EksSpotClusterProps extends StackProps {
 
 export class EksSpotCluster extends Resource {
   readonly cluster: eks.Cluster;
-  // readonly clusterName: string;
   readonly clusterVersion: ClusterVersion;
   readonly instanceRole: iam.IRole;
   readonly instanceProfile: iam.CfnInstanceProfile;
   readonly vpc: ec2.IVpc;
-  // readonly kubectlEnabled: boolean;
-  // private _awsAuth?: AwsAuth;
-  /**
-   * If this cluster is kubectl-enabled, returns the `ClusterResource` object
-   * that manages it. If this cluster is not kubectl-enabled (i.e. uses the
-   * stock `CfnCluster`), this is `undefined`.
-   */
+
 
   constructor(scope: Construct, id: string, props: EksSpotClusterProps) {
     super(scope, id);
-
-    // this.kubectlEnabled = props.kubectlEnabled === undefined ? true : props.kubectlEnabled;
 
     // this.cluster = props.cluster;
     this.clusterVersion = props.clusterVersion;
@@ -73,19 +58,9 @@ export class EksSpotCluster extends Resource {
         ec2.Vpc.fromLookup(this, 'Vpc', { vpcId: this.node.tryGetContext('use_vpc_id') }) :
         new ec2.Vpc(this, 'Vpc', { maxAzs: 3, natGateways: 1 });
 
-    // this.vpc = ec2.Vpc.fromLookup(this, 'Vpc', { isDefault: true })
     const clusterAdmin = new iam.Role(this, 'AdminRole', {
       assumedBy: new iam.AccountRootPrincipal()
     });
-
-    // this.cluster = props.clusterAttributes ? 
-    //   eks.Cluster.fromClusterAttributes(this, 'Cluster', props.clusterAttributes) : 
-    //   new eks.Cluster(this, 'Cluster', {
-    //     vpc: this.vpc,
-    //     mastersRole: clusterAdmin,
-    //     defaultCapacity: 0,
-    //     version: this.clusterVersion
-    //   })
 
     this.cluster= new eks.Cluster(this, 'Cluster', {
         vpc: this.vpc,
@@ -94,42 +69,7 @@ export class EksSpotCluster extends Resource {
         version: this.clusterVersion,
       })
 
-    // this.cluster.addCapacity('NG', {
-    //   minCapacity:1,
-    //   instanceType: new ec2.InstanceType('t3.micro'),
-    // })
-
-    // super(scope, id, {
-    //   vpc: ec2.Vpc.fromLookup(this, 'Vpc', { isDefault: true }),
-    //   mastersRole: clusterAdmin,
-    //   defaultCapacity: 0,
-    //   version: props.clusterVersion
-    // })
-
-
-
-    // this.clusterName = this.cluster.clusterName
-
-    // const capacityAsg =  this.cluster.addCapacity('SpotCapacity', {
-    //   instanceType: props.defaultInstanceType,
-    //   minCapacity: props.minCapacity ?? 2,
-    //   maxCapacity: props.maxCapacity,
-    //   // placeholder
-    //   spotPrice: '0.01'
-    // })
-
-    // const cfnInstanceProfile = capacityAsg.node.tryFindChild('InstanceProfile') as iam.CfnInstanceProfile
-
-
-
-    // const cfnAsg = capacityAsg.node.tryFindChild('ASG') as autoscaling.CfnAutoScalingGroup
-    // cfnAsg.addPropertyOverride('LaunchTemplate', {
-    //   'LaunchTemplateId': lt.ref,
-    //   'Version': lt.attrLatestVersionNumber.toString()
-    // })
     
-    // remote the LaunchConfigurationName
-    // cfnAsg.addPropertyDeletionOverride('LaunchConfigurationName')
   }
 
 
@@ -137,18 +77,12 @@ export class EksSpotCluster extends Resource {
     new SpotFleet(this, id, {
       cluster: this,
       ...props
-      // blockDuration: props.blockDuration,
-      // clusterVersion: this.clusterVersion,
-      // defaultInstanceType: new ec2.InstanceType(DEFAULT_INSTANCE_TYPE),
-      // launchTemplate: new LaunchTemplate(),
     })
   }
 }
 
 export interface BaseSpotFleetProps extends ResourceProps {
-  // readonly launchTemplate: LaunchTemplate;
   readonly defaultInstanceType?: ec2.InstanceType;
-  // readonly clusterVersion: ClusterVersion;
   readonly blockDuration?: BlockDuration;
   readonly instanceInterruptionBehavior ?: InstanceInterruptionBehavior;
   readonly instanceRole?: iam.Role;
@@ -266,16 +200,6 @@ export class SpotFleet extends Resource {
       }
     })
 
-    // // EKS Required Tags
-    // Tag.add(lt, `kubernetes.io/cluster/${this.clusterStack.cluster.clusterName}`, 'owned', {
-    //   applyToLaunchedInstances: true,
-    // });
-
-    // Tag.add(lt, 'Name', `${Stack.of(this).stackName}/Cluster/${this.spotFleetId}`, {
-    //   applyToLaunchedInstances: true,
-    // })
-
-
     const spotFleetRole = new iam.Role(this, 'FleetRole', {
       assumedBy: new iam.ServicePrincipal('spotfleet.amazonaws.com'),
       managedPolicies: [
@@ -314,27 +238,6 @@ export class SpotFleet extends Resource {
         'system:nodes',
       ],
     });
-
-
-    // do not attempt to map the role if `kubectl` is not enabled for this
-    // cluster or if `mapRole` is set to false. By default this should happen.
-    // const mapRole = props.mapRole === undefined ? true : props.mapRole;
-    // if (mapRole && this.clusterStack.cluster.kubectlEnabled) {
-    //   // see https://docs.aws.amazon.com/en_us/eks/latest/userguide/add-user-role.html
-    //   this.clusterStack.cluster.awsAuth.addRoleMapping(this.instanceRole, {
-    //     username: 'system:node:{{EC2PrivateDNSName}}',
-    //     groups: [
-    //       'system:bootstrappers',
-    //       'system:nodes',
-    //     ],
-    //   });
-    // } else {
-    //   // since we are not mapping the instance role to RBAC, synthesize an
-    //   // output so it can be pasted into `aws-auth-cm.yaml`
-    //   new CfnOutput(this, 'InstanceRoleARN', {
-    //     value: this.instanceRole.roleArn,
-    //   });
-    // }
     
   }
 }
