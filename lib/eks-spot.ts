@@ -36,14 +36,12 @@ export interface EksSpotClusterProps extends StackProps {
     readonly kubectlEnabled?: boolean;
 }
 
-
 export class EksSpotCluster extends Resource {
   readonly cluster: eks.Cluster;
   readonly clusterVersion: ClusterVersion;
   readonly instanceRole: iam.IRole;
   readonly instanceProfile: iam.CfnInstanceProfile;
   readonly vpc: ec2.IVpc;
-
 
   constructor(scope: Construct, id: string, props: EksSpotClusterProps) {
     super(scope, id);
@@ -68,10 +66,7 @@ export class EksSpotCluster extends Resource {
         defaultCapacity: 0,
         version: this.clusterVersion,
       })
-
-    
   }
-
 
   public addSpotFleet(id: string, props: BaseSpotFleetProps) {
     new SpotFleet(this, id, {
@@ -127,8 +122,6 @@ export class SpotFleet extends Resource {
     this.instanceRole.addManagedPolicy(iam.ManagedPolicy.fromAwsManagedPolicyName('AmazonEKSWorkerNodePolicy'));
     this.instanceRole.addManagedPolicy(iam.ManagedPolicy.fromAwsManagedPolicyName('AmazonEKS_CNI_Policy'));
     this.instanceRole.addManagedPolicy(iam.ManagedPolicy.fromAwsManagedPolicyName('AmazonEC2ContainerRegistryReadOnly'));
-
-
 
     const instanceProfile = new iam.CfnInstanceProfile(this, 'InstanceProfile', {
       roles: [this.instanceRole.roleName]
