@@ -35,17 +35,16 @@ const clusterStack = new EksSpotCluster(stack, 'Cluster', {
 });
 
 clusterStack.addSpotFleet('OneHourFleet', {
-  blockDuration: BlockDuration.SIX_HOURS,
+  blockDuration: BlockDuration.ONE_HOUR,
   targetCapacity: 1,
   defaultInstanceType: new ec2.InstanceType('p3.2xlarge'),
-  validUntil: addMinutes(new Date(), 30).toISOString(),
+  validUntil: addHours(new Date(), 1).toISOString(),
   terminateInstancesWithExpiration: true
 })
 
-
 clusterStack.addSpotFleet('TwoHourFleet', {
   blockDuration: BlockDuration.ONE_HOUR,
-  targetCapacity: 1,
+  targetCapacity: 2,
   defaultInstanceType: new ec2.InstanceType('c5.large'),
   validUntil: addHours(new Date(), 1).toISOString(),
   terminateInstancesWithExpiration: true
