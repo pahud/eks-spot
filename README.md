@@ -144,7 +144,7 @@ No. This construct library does not support existing Amazon EKS clusters. You ha
 Not at this moment. But we plan to publish this construct with `JSII` so we can install this library via `npm`, `pypi`, `maven` or `nuget`.
 
 #### How much time can I block the spotfleet?
-You can block the fleet from one hour to 6 hours.
+You can block the fleet with hourly increments up to 6 hours.
 
 #### What happens after the `blockDuration`?
 Spot Blocks ensure the availability of your spot instances during the `blockDuration` and avoid termination during the price disruption. After the `blockDuration`, by default, your spot instances will still be in `running` state but it doesn't ensure the availability, which means it might be terminated anytime after the `blockDuration`.
