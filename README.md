@@ -5,9 +5,10 @@ This project aims to help you provison Amazon EKS cluster with `EC2 Spot Blocks`
 
 ## Features
 
-- [x] Extending the upstream AWS CDK `aws-eks` construct libraries
+- [x] support the upstream AWS CDK `aws-eks` construct libraries by extending its capabilities
 - [x] `addSpotFleet()` to create your spot fleet for your cluster
 - [x] define your `blockDuration`, `validFrom` and `validUntil` for fine-graned control
+- [x] support any AWS commercial regions which has Amazon EKS and EC2 Spot Block support, including AWS China regions
 
 
 ## Usage
