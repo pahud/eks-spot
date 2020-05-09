@@ -1,6 +1,6 @@
-# Welcome to `eks-spot` project!
+# What is `eks-spot`
 
-This project aims to help you provison Amazon EKS cluster with `EC2 Spot Blocks` for defined duration workloads.
+`eks-spot` aims to help you provison Amazon EKS cluster with `EC2 Spot Blocks` for defined duration workloads and helps you benefit from predicted availability and considerable price reduction for your kubernetes workload.
 
 
 ## Features
