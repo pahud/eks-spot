@@ -143,6 +143,25 @@ No. This construct library does not support existing Amazon EKS clusters. You ha
 #### Can I write the CDK in other languages like `Python` and `Java`?
 Not at this moment. But we plan to publish this construct with `JSII` so we can install this library via `npm`, `pypi`, `maven` or `nuget`.
 
+#### How much time can I block the spotfleet?
+You can block the fleet from one hour to 6 hours.
+
+#### What happens after the `blockDuration`?
+Spot Blocks ensure the availability of your spot instances during the `blockDuration` and avoid termination during the price disruption. After the `blockDuration`, by default, your spot instances will still be in `running` state but it doesn't ensure the availability, which means it might be terminated anytime after the `blockDuration`.
+
+#### Can I terminate the fleet immediately after the `blockDuration` to save the money?
+Yes. Basically you can configure `validFrom`, `validUntil` and `terminateInstancesWithExpiration` to achieve this. 
+
+However, consider the following scenario
+
+```
+<deploy start at 1:00>|--------(one hour)-----------------------|<2:00>
+                           |<fleet created at 1:05>--------(one-hour block)-------|<2:05>
+```
+
+Your fleet will be terminated at `2:00` rather at `2:05`.
+
+
 #### Does it support AWS China regions?
 Yes. Including **Beijing**(`cn-north-1`) and **Ningxia**(`cn-northwest-1`).
 
