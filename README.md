@@ -1,14 +1,71 @@
-# Welcome to your CDK TypeScript project!
+# Welcome to `eks-spot` project!
 
-This is a blank project for TypeScript development with CDK.
+This project aims to help you provison Amazon EKS cluster with `EC2 Spot Blocks` for defined duration workloads.
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
 
-## Useful commands
+## Features
 
- * `npm run build`   compile typescript to js
- * `npm run watch`   watch for changes and compile
- * `npm run test`    perform the jest unit tests
- * `cdk deploy`      deploy this stack to your default AWS account/region
- * `cdk diff`        compare deployed stack with current state
- * `cdk synth`       emits the synthesized CloudFormation template
+- Extending the upstream AWS CDK `aws-eks` construct libraries
+- `addSpotFleet()` to create your spot fleet for your cluster
+- define your `blockDuration`, `validFrom` and `validUntil` for fine-graned control
+
+
+## Usage
+
+Make sure you have installed `aws-cdk`
+
+```bash
+$ cdk --version
+```
+
+```bash
+# git clone this project
+git clone https://github.com/pahud/aws/eks-spot.git
+# cd into the cdk directory
+cd eks-spot/cdk
+# bootstrap your region for the first time
+cdk bootstrap
+# cdk diff to see what's going to be created
+cdk diff
+# deploy it
+cdk deploy
+```
+
+## To deploy into existing VPC or other AWS_REGION
+
+Use `-c use_default_vpc=1` to deploy into your default VPC 
+
+```bash
+# to deploy into the default vpc
+$ cdk diff -c use_default_vpc=1
+```
+
+Use `-c use_vpc_id=vpc-xxxxxx` to deploy into any existing VPC
+
+```bash
+# to deploy into vpc-xxxxxx
+$ cdk diff -c use_vpc_id=vpc-xxxxxx
+```
+
+Use `AWS_REGION` to override the default region
+
+To deploy in to `ap-northeast-1`
+
+```bash
+$ AWS_REGION=ap-norteast-1 cdk diff -c use_vpc_id=vpc-xxxxxx
+```
+
+Use `--profile` to specify different `AWS_PROFILE`
+
+```bash
+# deploy in to AWS China Ningxia region
+$ AWS_REGION=cn-northwest-1 cdk --profile cn cdk diff 
+# deploy in to AWS China Beijing region
+$ AWS_REGION=cn-north-1 cdk --profile cn cdk diff 
+```
+
+## Destroy and clean up
+
+```bash
+$ cdk destroy
+```
