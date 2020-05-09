@@ -161,6 +161,11 @@ However, consider the following scenario
 
 Your fleet will be terminated at `2:00` rather at `2:05`.
 
+## Are `tains` and `labels` supported?
+Yes. 
+
+(samples TBD)
+
 
 #### Does it support AWS China regions?
 Yes. Including **Beijing**(`cn-north-1`) and **Ningxia**(`cn-northwest-1`).
