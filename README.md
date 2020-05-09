@@ -133,3 +133,27 @@ clusterStack.addSpotFleet('TwoHourFleet', {
 })
 
 ```
+
+
+## FAQ
+
+#### Does `eks-spot` support existing eks clusters created by `eksctl`, `terraform` or any other tools?
+No. This construct library does not support existing Amazon EKS clusters. You have to create the cluster as well as the spot fleet altogether in this construct library.
+
+#### Can I write the CDK in other languages like `Python` and `Java`?
+Not at this moment. But we plan to publish this construct with `JSII` so we can install this library via `npm`, `pypi`, `maven` or `nuget`.
+
+#### Does it support AWS China regions?
+Yes. Including **Beijing**(`cn-north-1`) and **Ningxia**(`cn-northwest-1`).
+
+#### How much can I save from the EC2 Spot Block compared to the on-demand?
+According to this [document](https://aws.amazon.com/ec2/spot/pricing/?nc1=h_ls)
+
+`
+Spot Instances are also available to run for a predefined duration – in hourly increments up to six hours in length – at a discount of up to 30-50% compared to On-Demand pricing.
+`
+
+
+
+
+
