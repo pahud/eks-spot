@@ -2,7 +2,7 @@
 
 `eks-spot` aims to help you provison Amazon EKS cluster with `EC2 Spot Blocks` for defined duration workloads and helps you benefit from ensured availability and considerable price reduction for your kubernetes workload.
 
-![](images/pahud_eks-spot_diagram.png)
+![](images/pahud_eks-spot2.png)
 
 
 ## Features
