@@ -116,7 +116,7 @@ const clusterStack = new EksSpotCluster(stack, 'Cluster', {
 
 // add the 1st spotfleet with 2 p3.2xlarge spot block instances for six hours
 // and terminate this fleet after then
-clusterStack.addSpotFleet('OneHourFleet', {
+clusterStack.addSpotFleet('SixHourFleet', {
   blockDuration: BlockDuration.SIX_HOURS,
   targetCapacity: 2,
   defaultInstanceType: new ec2.InstanceType('p3.2xlarge'),
@@ -126,7 +126,7 @@ clusterStack.addSpotFleet('OneHourFleet', {
 
 // add the 2nd spotfleet with 2 c5.large spot block instances for one hour
 // and terminate this fleet after then
-clusterStack.addSpotFleet('TwoHourFleet', {
+clusterStack.addSpotFleet('OneHourFleet', {
   blockDuration: BlockDuration.ONE_HOUR,
   targetCapacity: 2,
   defaultInstanceType: new ec2.InstanceType('c5.large'),
