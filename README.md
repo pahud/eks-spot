@@ -2,6 +2,8 @@
 
 This project aims to help you provison Amazon EKS cluster with `EC2 Spot Blocks` for defined duration workloads.
 
+![](images/pahud_eks-spot.png)
+
 
 ## Features
 
