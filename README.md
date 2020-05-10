@@ -179,7 +179,8 @@ According to this [document](https://aws.amazon.com/ec2/spot/pricing/?nc1=h_ls)
 Spot Instances are also available to run for a predefined duration – in hourly increments up to six hours in length – at a discount of up to 30-50% compared to On-Demand pricing.
 `
 
-
+### Will this library become part of the upstream `aws-eks` construct library?
+Probably. As it's still in the prelimary stage, we are still collecting feedbacks from the community to make `eks-spot` ready for production workloads. Eventually we will commit this feature to the upstream `aws-eks` construct library in AWS CDK through pull requests.
 
 
 
