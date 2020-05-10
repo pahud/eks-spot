@@ -180,7 +180,7 @@ Spot Instances are also available to run for a predefined duration – in hourly
 `
 
 ### Will this library become part of the upstream `aws-eks` construct library?
-Probably. As it's still in the prelimary stage, we are still collecting feedbacks from the community to make `eks-spot` ready for production workloads. Eventually we will commit this feature to the upstream `aws-eks` construct library in AWS CDK through pull requests.
+Probably. As it's still in the preliminary stage, we are still collecting feedbacks from the community to make `eks-spot` ready for production workloads. Eventually we will commit this feature to the upstream `aws-eks` construct library in AWS CDK through pull requests.
 
 
 
