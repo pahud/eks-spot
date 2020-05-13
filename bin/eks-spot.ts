@@ -32,6 +32,7 @@ const stack = new cdk.Stack(app, 'EksSpotStack', { env });
 
 const clusterStack = new EksSpotCluster(stack, 'Cluster', { 
   clusterVersion: ClusterVersion.KUBERNETES_116,
+  customAmiId: 'ami-xxxxxx'
 });
 
 

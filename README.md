@@ -73,8 +73,17 @@ $ AWS_REGION=cn-north-1 cdk --profile cn cdk diff
 $ cdk destroy
 ```
 
+## Custom AMI support
 
-## Sample
+```ts
+const clusterStack = new EksSpotCluster(stack, 'Cluster', { 
+  clusterVersion: ClusterVersion.KUBERNETES_116,
+  customAmiId: 'ami-xxxxxx'
+});
+```
+
+
+## Full Sample
 
 ```ts
 #!/usr/bin/env node
@@ -135,6 +144,8 @@ clusterStack.addSpotFleet('TwoHourFleet', {
 })
 
 ```
+
+
 
 
 ## FAQ

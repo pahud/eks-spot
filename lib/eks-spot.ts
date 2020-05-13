@@ -34,6 +34,13 @@ export interface EksSpotClusterProps extends StackProps {
     readonly instanceRole?: iam.IRole;
     readonly instanceInterruptionBehavior?: InstanceInterruptionBehavior;
     readonly kubectlEnabled?: boolean;
+    /**
+     * Specify a custom AMI ID for your spot fleet. By default the Amazon EKS-optimized
+     * AMI will be selected.
+     * 
+     * @default - none
+     */
+    readonly customAmiId?: string;
 }
 
 export class EksSpotCluster extends Resource {
@@ -87,6 +94,7 @@ export interface BaseSpotFleetProps extends ResourceProps {
   readonly validFrom?: string;
   readonly validUntil?: string;
   readonly terminateInstancesWithExpiration?: boolean;
+  readonly customAmiId?: string;
 }
 
 
@@ -154,12 +162,14 @@ export class SpotFleet extends Resource {
 
     this.defaultInstanceType = props.defaultInstanceType ?? new ec2.InstanceType(DEFAULT_INSTANCE_TYPE)
 
+    const imageId = props.customAmiId ?? new eks.EksOptimizedImage({
+      nodeType: nodeTypeForInstanceType(this.defaultInstanceType),
+      kubernetesVersion: props.cluster.clusterVersion,
+    }).getImage(this).imageId
+
     const lt = new ec2.CfnLaunchTemplate(this, 'LaunchTemplate', {
       launchTemplateData: {
-        imageId: new eks.EksOptimizedImage({
-          nodeType: nodeTypeForInstanceType(this.defaultInstanceType),
-          kubernetesVersion: props.cluster.clusterVersion,
-        }).getImage(this).imageId,
+        imageId,
         instanceType: this.defaultInstanceType.toString(),
         tagSpecifications: [
           {
