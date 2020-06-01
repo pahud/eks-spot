@@ -1,6 +1,8 @@
 # `eks-spot-blocks`
 
 [![NPM version](https://badge.fury.io/js/eks-spot-blocks.svg)](https://badge.fury.io/js/eks-spot-blocks)
+[![PyPI version](https://badge.fury.io/py/eks-spot-blocks.svg)](https://badge.fury.io/py/eks-spot-blocks)
+
 
 
 `eks-spot-blocks` is a JSII construct library for AWS CDK which aims to help you provison Amazon EKS cluster with `EC2 Spot Blocks` for defined duration workloads and helps you benefit from ensured availability and considerable price reduction for your kubernetes workload.
