@@ -1,6 +1,6 @@
 {
   "name": "eks-spot-blocks",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "author": {
     "name": "Pahud Hsieh<hunhsieh@amazon.com>"
   },
