@@ -1,9 +1,9 @@
-import { Stack, StackProps, Construct, Resource, ResourceProps, PhysicalName, Fn, CfnOutput, Tag } from '@aws-cdk/core';
+import { Stack, StackProps, Construct, Resource, ResourceProps, PhysicalName, Fn } from '@aws-cdk/core';
 import * as eks from '@aws-cdk/aws-eks';
 import { renderAmazonLinuxUserData } from './user-data';
 import * as iam from '@aws-cdk/aws-iam';
 import * as ec2 from '@aws-cdk/aws-ec2';
-import { LaunchTemplate } from './launch-template';
+import { LaunchTemplate, ILaunchtemplate } from './launch-template';
 
 const DEFAULT_INSTANCE_TYPE = 't3.large'
 
@@ -46,8 +46,8 @@ export interface EksSpotClusterProps extends StackProps {
 export class EksSpotCluster extends Resource {
   readonly cluster: eks.Cluster;
   readonly clusterVersion: ClusterVersion;
-  readonly instanceRole: iam.IRole;
-  readonly instanceProfile: iam.CfnInstanceProfile;
+  // readonly instanceRole: iam.IRole;
+  // readonly instanceProfile: iam.CfnInstanceProfile;
   readonly vpc: ec2.IVpc;
 
   constructor(scope: Construct, id: string, props: EksSpotClusterProps) {
@@ -81,6 +81,21 @@ export class EksSpotCluster extends Resource {
       ...props
     })
   }
+
+  public addDays(date: Date, days: number): Date {
+    date.setDate(date.getDate() + days);
+    return date;
+  }
+
+  public addHours(date: Date, hours: number): Date {
+    date.setHours(date.getHours() + hours);
+    return date;
+  }
+
+  public addMinutes(date: Date, minutes: number): Date {
+    date.setMinutes(date.getMinutes() + minutes);
+    return date;
+  }
 }
 
 export interface BaseSpotFleetProps extends ResourceProps {
@@ -100,16 +115,16 @@ export interface BaseSpotFleetProps extends ResourceProps {
 
 export interface SpotFleetProps extends BaseSpotFleetProps {
   readonly cluster: EksSpotCluster;
-  readonly launchTemplate?: LaunchTemplate;
+  readonly launchTemplate?: ILaunchtemplate;
 }
 
 export class SpotFleet extends Resource {
   readonly instanceRole: iam.IRole;
   readonly clusterStack: EksSpotCluster;
   readonly defaultInstanceType: ec2.InstanceType;
-  readonly launchTemplate: LaunchTemplate;
   readonly targetCapacity?: number;
   readonly spotFleetId: string;
+  readonly launchTemplate: ILaunchtemplate;
 
 
   constructor(scope: Construct, id: string, props: SpotFleetProps) {
@@ -215,7 +230,7 @@ export class SpotFleet extends Resource {
     for (const s of this.clusterStack.cluster.vpc.privateSubnets) {
       overrides.push({ subnetId: s.subnetId })
     }
-    const spotFleet = new ec2.CfnSpotFleet(this, id, {
+    new ec2.CfnSpotFleet(this, id, {
       spotFleetRequestConfigData: {
         launchTemplateConfigs: [
           {

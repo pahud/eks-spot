@@ -1,6 +1,25 @@
 *.ts
 !*.d.ts
+tsconfig.json
 
 # CDK asset staging directory
 .cdk.staging
 cdk.out
+cdk.context.json
+cdk.json
+
+# log
+yarn*.log
+
+# images
+images/*
+
+
+# Exclude jsii outdir
+dist
+
+# Exclude bin
+bin
+
+# Include .jsii
+!.jsii

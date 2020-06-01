@@ -1,14 +1,14 @@
 import { expect as expectCDK, matchTemplate, MatchStyle } from '@aws-cdk/assert';
 import * as cdk from '@aws-cdk/core';
-import * as EksSpot from '../lib/eks-spot-stack';
-import { InstanceType } from '@aws-cdk/aws-ec2';
+import * as EksSpot from '../lib/eks-spot';
 
 test('Empty Stack', () => {
     const app = new cdk.App();
+    const stack = new cdk.Stack(app, 'EksSpotStack');
+
     // WHEN
-    const stack = new EksSpot.EksSpotStack(app, 'MyTestStack', {
-      clusterVersion: EksSpot.ClusterVersion.KUBERNETES_115,
-      defaultInstanceType: new InstanceType('t3.large'),
+    new EksSpot.EksSpotCluster(stack, 'MyTestStack', {
+      clusterVersion: EksSpot.ClusterVersion.KUBERNETES_116,
     });
     // THEN
     expectCDK(stack).to(matchTemplate({
