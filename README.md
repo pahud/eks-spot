@@ -5,7 +5,7 @@
 
 
 
-`eks-spot-blocks` is a JSII construct library for AWS CDK which aims to help you provison Amazon EKS cluster with `EC2 Spot Blocks` for defined duration workloads and helps you benefit from ensured availability and considerable price reduction for your kubernetes workload.
+`eks-spot-blocks` is a JSII construct library for AWS CDK which allows you to provison Amazon EKS cluster with `EC2 Spot Blocks` for defined workloads and helps you benefit from ensured availability and considerable price reduction for your kubernetes workload.
 
 ![](images/pahud_eks-spot2.png)
 
