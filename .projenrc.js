@@ -19,14 +19,6 @@ const project = new JsiiProject({
     '@aws-cdk/aws-iam': Semver.caret('1.44.0'),
     '@aws-cdk/aws-ssm': Semver.caret('1.44.0'),
   },
-  dependencies: {
-    constructs: Semver.caret('3.0.3'),
-    '@aws-cdk/core': Semver.caret('1.44.0'),
-    '@aws-cdk/aws-ec2': Semver.caret('1.44.0'),
-    '@aws-cdk/aws-eks': Semver.caret('1.44.0'),
-    '@aws-cdk/aws-iam': Semver.caret('1.44.0'),
-    '@aws-cdk/aws-ssm': Semver.caret('1.44.0'),
-  },
   python: {
     distName: 'eks-spot-blocks',
     module: 'eks_spot_blocks'
