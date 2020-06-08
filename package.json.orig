@@ -1,0 +1,57 @@
+{
+  "name": "eks-spot-blocks",
+  "version": "0.1.8",
+  "author": {
+    "name": "Pahud Hsieh<hunhsieh@amazon.com>"
+  },
+  "repository": {
+    "url": "https://github.com/pahud/eks-spot-blocks.git"
+  },
+  "license": "Apache-2.0",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "build:jsii": "jsii",
+    "package": "jsii-pacmak -vvv",
+    "watch": "tsc -w",
+    "test": "jest",
+    "cdk": "cdk"
+  },
+  "devDependencies": {
+    "@aws-cdk/assert": "1.42.0",
+    "@types/jest": "^25.2.1",
+    "aws-cdk": "1.42.0",
+    "jest": "^25.5.4",
+    "jsii": "^1.5.0",
+    "jsii-pacmak": "^1.5.0",
+    "jsii-release": "^0.1.5",
+    "ts-jest": "^25.3.1",
+    "ts-node": "^8.10.2",
+    "typescript": "~3.7.2"
+  },
+  "dependencies": {
+    "@aws-cdk/aws-ec2": "^1.42.0",
+    "@aws-cdk/aws-eks": "^1.42.0",
+    "@aws-cdk/aws-iam": "^1.42.0",
+    "@aws-cdk/aws-ssm": "^1.42.0",
+    "@aws-cdk/core": "1.42.0"
+  },
+  "jsii": {
+    "outdir": "dist",
+    "targets": {
+      "python": {
+        "distName": "eks-spot-blocks",
+        "module": "eks_spot_blocks"
+      }
+    }
+  },
+  "peerDependencies": {
+    "@aws-cdk/aws-ec2": "^1.42.0",
+    "@aws-cdk/aws-eks": "^1.42.0",
+    "@aws-cdk/aws-iam": "^1.42.0",
+    "@aws-cdk/aws-ssm": "^1.42.0",
+    "@aws-cdk/core": "1.42.0",
+    "constructs": "3.0.3"
+  }
+}
