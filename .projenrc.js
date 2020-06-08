@@ -13,9 +13,11 @@ const project = new JsiiProject({
   stability: 'experimental',
   devDependencies: {
     '@aws-cdk/assert': Semver.caret('1.44.0'),
+    'ts-jest': Semver.caret('25.3.1'),
+    'jest': Semver.caret('25.5.0'),
   },
   peerDependencies: {
-    constructs: Semver.caret('3.0.2'),
+    constructs: Semver.caret('3.0.3'),
     '@aws-cdk/core': Semver.caret('1.44.0'),
     '@aws-cdk/aws-ec2': Semver.caret('1.44.0'),
     '@aws-cdk/aws-eks': Semver.caret('1.44.0'),
