@@ -30,4 +30,14 @@ const project = new JsiiProject({
   }
 });
 
+project.addFields({
+  'keywords': [
+    'cdk',
+    'aws',
+    'eks',
+    'spot',
+    'spot-blocks'
+  ]
+});
+
 project.synth();
