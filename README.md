@@ -2,6 +2,7 @@
 
 [![NPM version](https://badge.fury.io/js/eks-spot-blocks.svg)](https://badge.fury.io/js/eks-spot-blocks)
 [![PyPI version](https://badge.fury.io/py/eks-spot-blocks.svg)](https://badge.fury.io/py/eks-spot-blocks)
+![Release](https://github.com/pahud/eks-spot-blocks/workflows/Release/badge.svg)
 
 
 
