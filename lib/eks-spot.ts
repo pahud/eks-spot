@@ -29,18 +29,18 @@ export enum ClusterVersion {
 }
 
 export interface EksSpotClusterProps extends StackProps {
-    readonly clusterAttributes?: eks.ClusterAttributes;
-    readonly clusterVersion: ClusterVersion;
-    readonly instanceRole?: iam.IRole;
-    readonly instanceInterruptionBehavior?: InstanceInterruptionBehavior;
-    readonly kubectlEnabled?: boolean;
-    /**
+  readonly clusterAttributes?: eks.ClusterAttributes;
+  readonly clusterVersion: ClusterVersion;
+  readonly instanceRole?: iam.IRole;
+  readonly instanceInterruptionBehavior?: InstanceInterruptionBehavior;
+  readonly kubectlEnabled?: boolean;
+  /**
      * Specify a custom AMI ID for your spot fleet. By default the Amazon EKS-optimized
      * AMI will be selected.
      * 
      * @default - none
      */
-    readonly customAmiId?: string;
+  readonly customAmiId?: string;
 }
 
 export class EksSpotCluster extends Resource {
@@ -64,21 +64,21 @@ export class EksSpotCluster extends Resource {
         new ec2.Vpc(this, 'Vpc', { maxAzs: 3, natGateways: 1 });
 
     const clusterAdmin = new iam.Role(this, 'AdminRole', {
-      assumedBy: new iam.AccountRootPrincipal()
+      assumedBy: new iam.AccountRootPrincipal(),
     });
 
     this.cluster= new eks.Cluster(this, 'Cluster', {
-        vpc: this.vpc,
-        mastersRole: clusterAdmin,
-        defaultCapacity: 0,
-        version: this.clusterVersion,
-      })
+      vpc: this.vpc,
+      mastersRole: clusterAdmin,
+      defaultCapacity: 0,
+      version: this.clusterVersion,
+    })
   }
 
   public addSpotFleet(id: string, props: BaseSpotFleetProps) {
     new SpotFleet(this, id, {
       cluster: this,
-      ...props
+      ...props,
     })
   }
 
@@ -147,11 +147,11 @@ export class SpotFleet extends Resource {
     this.instanceRole.addManagedPolicy(iam.ManagedPolicy.fromAwsManagedPolicyName('AmazonEC2ContainerRegistryReadOnly'));
 
     const instanceProfile = new iam.CfnInstanceProfile(this, 'InstanceProfile', {
-      roles: [this.instanceRole.roleName]
+      roles: [this.instanceRole.roleName],
     })
 
     const sg = new ec2.SecurityGroup(this, 'SpotFleetSg', {
-      vpc: this.clusterStack.cluster.vpc
+      vpc: this.clusterStack.cluster.vpc,
     })
 
     // self rules
@@ -197,32 +197,32 @@ export class SpotFleet extends Resource {
               {
                 key: `kubernetes.io/cluster/${this.clusterStack.cluster.clusterName}`,
                 value: 'owned',
-              }
+              },
             
-            ]
-          }
+            ],
+          },
         ],
         instanceMarketOptions: {
           marketType: 'spot',
           spotOptions: {
             blockDurationMinutes: props.blockDuration ?? BlockDuration.ONE_HOUR,
-            instanceInterruptionBehavior: props.instanceInterruptionBehavior ?? InstanceInterruptionBehavior.TERMINATE
-          }
+            instanceInterruptionBehavior: props.instanceInterruptionBehavior ?? InstanceInterruptionBehavior.TERMINATE,
+          },
         },
         // userData: cdk.Fn.base64(capacityAsg.userData.render()),
         userData: Fn.base64(userData.render()),
         securityGroupIds: sg.connections.securityGroups.map(m => m.securityGroupId),
         iamInstanceProfile: {
-          arn: instanceProfile.attrArn
-        }
-      }
+          arn: instanceProfile.attrArn,
+        },
+      },
     })
 
     const spotFleetRole = new iam.Role(this, 'FleetRole', {
       assumedBy: new iam.ServicePrincipal('spotfleet.amazonaws.com'),
       managedPolicies: [
-        iam.ManagedPolicy.fromAwsManagedPolicyName('service-role/AmazonEC2SpotFleetTaggingRole')
-      ]
+        iam.ManagedPolicy.fromAwsManagedPolicyName('service-role/AmazonEC2SpotFleetTaggingRole'),
+      ],
     })
 
 
@@ -236,17 +236,17 @@ export class SpotFleet extends Resource {
           {
             launchTemplateSpecification: {
               launchTemplateId: lt.ref,
-              version: lt.attrLatestVersionNumber
+              version: lt.attrLatestVersionNumber,
             },
             overrides,
-          }
+          },
         ],
         iamFleetRole: spotFleetRole.roleArn,
         targetCapacity: props.targetCapacity ?? 1,
         validFrom: props.validFrom,
         validUntil: props.validUntil,
         terminateInstancesWithExpiration: props.terminateInstancesWithExpiration,
-      }
+      },
     })
 
     this.clusterStack.cluster.awsAuth.addRoleMapping(this.instanceRole, {

@@ -11,8 +11,11 @@ const project = new JsiiProject({
   authorName: 'Pahud Hsieh',
   authorEmail: 'hunhsieh@amazon.com',
   stability: 'experimental',
+  devDependencies: {
+    '@aws-cdk/assert': Semver.caret('1.44.0'),
+  },
   peerDependencies: {
-    constructs: Semver.caret('3.0.3'),
+    constructs: Semver.caret('3.0.2'),
     '@aws-cdk/core': Semver.caret('1.44.0'),
     '@aws-cdk/aws-ec2': Semver.caret('1.44.0'),
     '@aws-cdk/aws-eks': Semver.caret('1.44.0'),

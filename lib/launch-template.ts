@@ -13,7 +13,7 @@ export class LaunchTemplate implements ILaunchtemplate {
   public bind(spotfleet: SpotFleet): SpotFleetLaunchTemplateConfig {
     return {
       spotfleet,
-      launchTemplate: this
+      launchTemplate: this,
     }
   }
 }
