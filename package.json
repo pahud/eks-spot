@@ -39,7 +39,7 @@
     "ts-jest": "^26.1.0",
     "jest": "^26.0.1",
     "projen": "^0.1.36",
-    "standard-version": "^8.0.2",
+    "standard-version": "^8.0.0",
     "jsii": "^1.5.0",
     "jsii-diff": "^1.5.0",
     "jsii-pacmak": "^1.5.0",
@@ -77,7 +77,7 @@
     "node": ">= 10.17.0"
   },
   "license": "Apache-2.0",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "types": "lib/index.d.ts",
   "stability": "experimental",
   "jsii": {
