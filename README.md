@@ -27,7 +27,7 @@ import * as cdk from '@aws-cdk/core';
 import * as ec2 from '@aws-cdk/aws-ec2';
 
 const clusterStack = new eksspot.EksSpotCluster(stack, 'Cluster', {
-  clusterVersion: eksspot.ClusterVersion.KUBERNETES_116,
+  clusterVersion: eks.KubernetesVersion.V1_16,
 });
 
 clusterStack.addSpotFleet('FirstFleet', {
@@ -54,7 +54,7 @@ check [eks-spot-blocks-demo](https://github.com/pahud/eks-spot-blocks-demo) for 
 
 ```ts
 const clusterStack = new EksSpotCluster(stack, 'Cluster', { 
-  clusterVersion: ClusterVersion.KUBERNETES_116,
+  clusterVersion: eks.KubernetesVersion.V1_16,
   customAmiId: 'ami-xxxxxx'
 });
 ```

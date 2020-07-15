@@ -22,15 +22,9 @@ export enum InstanceInterruptionBehavior {
   TERMINATE = 'terminate'
 }
 
-export enum ClusterVersion {
-  KUBERNETES_114 = '1.14',
-  KUBERNETES_115 = '1.15',
-  KUBERNETES_116 = '1.16',
-}
-
 export interface EksSpotClusterProps extends StackProps {
   readonly clusterAttributes?: eks.ClusterAttributes;
-  readonly clusterVersion: ClusterVersion;
+  readonly clusterVersion: eks.KubernetesVersion;
   readonly instanceRole?: iam.IRole;
   readonly instanceInterruptionBehavior?: InstanceInterruptionBehavior;
   readonly kubectlEnabled?: boolean;
@@ -45,7 +39,7 @@ export interface EksSpotClusterProps extends StackProps {
 
 export class EksSpotCluster extends Resource {
   readonly cluster: eks.Cluster;
-  readonly clusterVersion: ClusterVersion;
+  readonly clusterVersion: eks.KubernetesVersion;
   // readonly instanceRole: iam.IRole;
   // readonly instanceProfile: iam.CfnInstanceProfile;
   readonly vpc: ec2.IVpc;
@@ -179,7 +173,7 @@ export class SpotFleet extends Resource {
 
     const imageId = props.customAmiId ?? new eks.EksOptimizedImage({
       nodeType: nodeTypeForInstanceType(this.defaultInstanceType),
-      kubernetesVersion: props.cluster.clusterVersion,
+      kubernetesVersion: props.cluster.clusterVersion.version,
     }).getImage(this).imageId
 
     const lt = new ec2.CfnLaunchTemplate(this, 'LaunchTemplate', {
