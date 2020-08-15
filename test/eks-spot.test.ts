@@ -1,6 +1,6 @@
-import { expect as expectCDK, haveResource } from '@aws-cdk/assert';
+import '@aws-cdk/assert/jest';
 import * as cdk from '@aws-cdk/core';
-import * as EksSpot from '../lib';
+import * as EksSpot from '../src';
 import * as eks from '@aws-cdk/aws-eks';
 
 test('create cluster only', () => {
@@ -12,5 +12,5 @@ test('create cluster only', () => {
     clusterVersion: eks.KubernetesVersion.V1_16,
   });
   // THEN
-  expectCDK(stack).to(haveResource('Custom::AWSCDK-EKS-Cluster'));
+  expect(stack).toHaveResource('Custom::AWSCDK-EKS-Cluster');
 });

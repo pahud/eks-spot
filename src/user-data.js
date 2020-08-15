@@ -1,0 +1,55 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.LifecycleLabel = exports.renderAmazonLinuxUserData = void 0;
+const core_1 = require("@aws-cdk/core");
+// tslint:disable-next-line:max-line-length
+function renderAmazonLinuxUserData(scope, clusterName, spotFleet, options = {}) {
+    const stack = core_1.Stack.of(scope);
+    // determine logical id of ASG so we can signal cloudformation
+    // const cfn = spotFleet.node.defaultChild as autoscaling.CfnAutoScalingGroup;
+    // const asgLogicalId = cfn.logicalId;
+    const spotFleetLogicalId = spotFleet.node.id;
+    const extraArgs = new Array();
+    extraArgs.push(`--use-max-pods ${options.useMaxPods === undefined ? true : options.useMaxPods}`);
+    if (options.awsApiRetryAttempts) {
+        extraArgs.push(`--aws-api-retry-attempts ${options.awsApiRetryAttempts}`);
+    }
+    if (options.enableDockerBridge) {
+        extraArgs.push('--enable-docker-bridge');
+    }
+    if (options.dockerConfigJson) {
+        extraArgs.push(`--docker-config-json '${options.dockerConfigJson}'`);
+    }
+    if (options.additionalArgs) {
+        extraArgs.push(options.additionalArgs);
+    }
+    const commandLineSuffix = extraArgs.join(' ');
+    const kubeletExtraArgsSuffix = options.kubeletExtraArgs || '';
+    // determine lifecycle label based on whether the ASG has a spot price.
+    // const lifecycleLabel = autoScalingGroup.spotPrice ? LifecycleLabel.SPOT : LifecycleLabel.ON_DEMAND;
+    const lifecycleLabel = LifecycleLabel.SPOT;
+    // const withTaints = autoScalingGroup.spotPrice ? '--register-with-taints=spotInstance=true:PreferNoSchedule' : '';
+    const withTaints = '--register-with-taints=spotInstance=true:PreferNoSchedule';
+    const kubeletExtraArgs = `--node-labels lifecycle=${lifecycleLabel} ${withTaints} ${kubeletExtraArgsSuffix}`.trim();
+    return [
+        'set -o xtrace',
+        `/etc/eks/bootstrap.sh ${clusterName} --kubelet-extra-args "${kubeletExtraArgs}" ${commandLineSuffix}`.trim(),
+        `/opt/aws/bin/cfn-signal --exit-code $? --stack ${stack.stackName} --resource ${spotFleetLogicalId} --region ${stack.region}`,
+    ];
+}
+exports.renderAmazonLinuxUserData = renderAmazonLinuxUserData;
+/**
+ * The lifecycle label for node selector
+ */
+var LifecycleLabel;
+(function (LifecycleLabel) {
+    /**
+     * on-demand instances
+     */
+    LifecycleLabel["ON_DEMAND"] = "OnDemand";
+    /**
+     * spot instances
+     */
+    LifecycleLabel["SPOT"] = "Ec2Spot";
+})(LifecycleLabel = exports.LifecycleLabel || (exports.LifecycleLabel = {}));
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidXNlci1kYXRhLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsidXNlci1kYXRhLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7OztBQUFBLHdDQUFzQztBQUl0QywyQ0FBMkM7QUFDM0MsU0FBZ0IseUJBQXlCLENBQUMsS0FBWSxFQUFFLFdBQW1CLEVBQUUsU0FBb0IsRUFBRSxVQUE0QixFQUFFO0lBRS9ILE1BQU0sS0FBSyxHQUFHLFlBQUssQ0FBQyxFQUFFLENBQUMsS0FBSyxDQUFDLENBQUM7SUFFOUIsOERBQThEO0lBQzlELDhFQUE4RTtJQUM5RSxzQ0FBc0M7SUFDdEMsTUFBTSxrQkFBa0IsR0FBRyxTQUFTLENBQUMsSUFBSSxDQUFDLEVBQUUsQ0FBQTtJQUU1QyxNQUFNLFNBQVMsR0FBRyxJQUFJLEtBQUssRUFBVSxDQUFDO0lBRXRDLFNBQVMsQ0FBQyxJQUFJLENBQUMsa0JBQWtCLE9BQU8sQ0FBQyxVQUFVLEtBQUssU0FBUyxDQUFDLENBQUMsQ0FBQyxJQUFJLENBQUMsQ0FBQyxDQUFDLE9BQU8sQ0FBQyxVQUFVLEVBQUUsQ0FBQyxDQUFDO0lBRWpHLElBQUksT0FBTyxDQUFDLG1CQUFtQixFQUFFO1FBQy9CLFNBQVMsQ0FBQyxJQUFJLENBQUMsNEJBQTRCLE9BQU8sQ0FBQyxtQkFBbUIsRUFBRSxDQUFDLENBQUM7S0FDM0U7SUFFRCxJQUFJLE9BQU8sQ0FBQyxrQkFBa0IsRUFBRTtRQUM5QixTQUFTLENBQUMsSUFBSSxDQUFDLHdCQUF3QixDQUFDLENBQUM7S0FDMUM7SUFFRCxJQUFJLE9BQU8sQ0FBQyxnQkFBZ0IsRUFBRTtRQUM1QixTQUFTLENBQUMsSUFBSSxDQUFDLHlCQUF5QixPQUFPLENBQUMsZ0JBQWdCLEdBQUcsQ0FBQyxDQUFDO0tBQ3RFO0lBRUQsSUFBSSxPQUFPLENBQUMsY0FBYyxFQUFFO1FBQzFCLFNBQVMsQ0FBQyxJQUFJLENBQUMsT0FBTyxDQUFDLGNBQWMsQ0FBQyxDQUFDO0tBQ3hDO0lBRUQsTUFBTSxpQkFBaUIsR0FBRyxTQUFTLENBQUMsSUFBSSxDQUFDLEdBQUcsQ0FBQyxDQUFDO0lBQzlDLE1BQU0sc0JBQXNCLEdBQUcsT0FBTyxDQUFDLGdCQUFnQixJQUFJLEVBQUUsQ0FBQztJQUU5RCx1RUFBdUU7SUFDdkUsc0dBQXNHO0lBQ3RHLE1BQU0sY0FBYyxHQUFHLGNBQWMsQ0FBQyxJQUFJLENBQUM7SUFDM0Msb0hBQW9IO0lBQ3BILE1BQU0sVUFBVSxHQUFHLDJEQUEyRCxDQUFDO0lBQy9FLE1BQU0sZ0JBQWdCLEdBQUcsMkJBQTJCLGNBQWMsSUFBSSxVQUFVLElBQUksc0JBQXNCLEVBQUUsQ0FBQyxJQUFJLEVBQUUsQ0FBQztJQUVwSCxPQUFPO1FBQ0wsZUFBZTtRQUNmLHlCQUF5QixXQUFXLDBCQUEwQixnQkFBZ0IsS0FBSyxpQkFBaUIsRUFBRSxDQUFDLElBQUksRUFBRTtRQUM3RyxrREFBa0QsS0FBSyxDQUFDLFNBQVMsZUFBZSxrQkFBa0IsYUFBYSxLQUFLLENBQUMsTUFBTSxFQUFFO0tBQzlILENBQUM7QUFDSixDQUFDO0FBNUNELDhEQTRDQztBQUVEOztHQUVHO0FBQ0gsSUFBWSxjQVNYO0FBVEQsV0FBWSxjQUFjO0lBQ3hCOztPQUVHO0lBQ0gsd0NBQXNCLENBQUE7SUFDdEI7O09BRUc7SUFDSCxrQ0FBZ0IsQ0FBQTtBQUNsQixDQUFDLEVBVFcsY0FBYyxHQUFkLHNCQUFjLEtBQWQsc0JBQWMsUUFTekIiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBTdGFjayB9IGZyb20gJ0Bhd3MtY2RrL2NvcmUnO1xuaW1wb3J0IHsgQm9vdHN0cmFwT3B0aW9ucyB9IGZyb20gJ0Bhd3MtY2RrL2F3cy1la3MvbGliL2NsdXN0ZXInO1xuaW1wb3J0IHsgU3BvdEZsZWV0IH0gZnJvbSAnLi9la3Mtc3BvdCc7XG5cbi8vIHRzbGludDpkaXNhYmxlLW5leHQtbGluZTptYXgtbGluZS1sZW5ndGhcbmV4cG9ydCBmdW5jdGlvbiByZW5kZXJBbWF6b25MaW51eFVzZXJEYXRhKHNjb3BlOiBTdGFjaywgY2x1c3Rlck5hbWU6IHN0cmluZywgc3BvdEZsZWV0OiBTcG90RmxlZXQsIG9wdGlvbnM6IEJvb3RzdHJhcE9wdGlvbnMgPSB7fSk6IHN0cmluZ1tdIHtcblxuICBjb25zdCBzdGFjayA9IFN0YWNrLm9mKHNjb3BlKTtcblxuICAvLyBkZXRlcm1pbmUgbG9naWNhbCBpZCBvZiBBU0cgc28gd2UgY2FuIHNpZ25hbCBjbG91ZGZvcm1hdGlvblxuICAvLyBjb25zdCBjZm4gPSBzcG90RmxlZXQubm9kZS5kZWZhdWx0Q2hpbGQgYXMgYXV0b3NjYWxpbmcuQ2ZuQXV0b1NjYWxpbmdHcm91cDtcbiAgLy8gY29uc3QgYXNnTG9naWNhbElkID0gY2ZuLmxvZ2ljYWxJZDtcbiAgY29uc3Qgc3BvdEZsZWV0TG9naWNhbElkID0gc3BvdEZsZWV0Lm5vZGUuaWRcblxuICBjb25zdCBleHRyYUFyZ3MgPSBuZXcgQXJyYXk8c3RyaW5nPigpO1xuXG4gIGV4dHJhQXJncy5wdXNoKGAtLXVzZS1tYXgtcG9kcyAke29wdGlvbnMudXNlTWF4UG9kcyA9PT0gdW5kZWZpbmVkID8gdHJ1ZSA6IG9wdGlvbnMudXNlTWF4UG9kc31gKTtcblxuICBpZiAob3B0aW9ucy5hd3NBcGlSZXRyeUF0dGVtcHRzKSB7XG4gICAgZXh0cmFBcmdzLnB1c2goYC0tYXdzLWFwaS1yZXRyeS1hdHRlbXB0cyAke29wdGlvbnMuYXdzQXBpUmV0cnlBdHRlbXB0c31gKTtcbiAgfVxuXG4gIGlmIChvcHRpb25zLmVuYWJsZURvY2tlckJyaWRnZSkge1xuICAgIGV4dHJhQXJncy5wdXNoKCctLWVuYWJsZS1kb2NrZXItYnJpZGdlJyk7XG4gIH1cblxuICBpZiAob3B0aW9ucy5kb2NrZXJDb25maWdKc29uKSB7XG4gICAgZXh0cmFBcmdzLnB1c2goYC0tZG9ja2VyLWNvbmZpZy1qc29uICcke29wdGlvbnMuZG9ja2VyQ29uZmlnSnNvbn0nYCk7XG4gIH1cblxuICBpZiAob3B0aW9ucy5hZGRpdGlvbmFsQXJncykge1xuICAgIGV4dHJhQXJncy5wdXNoKG9wdGlvbnMuYWRkaXRpb25hbEFyZ3MpO1xuICB9XG5cbiAgY29uc3QgY29tbWFuZExpbmVTdWZmaXggPSBleHRyYUFyZ3Muam9pbignICcpO1xuICBjb25zdCBrdWJlbGV0RXh0cmFBcmdzU3VmZml4ID0gb3B0aW9ucy5rdWJlbGV0RXh0cmFBcmdzIHx8ICcnO1xuXG4gIC8vIGRldGVybWluZSBsaWZlY3ljbGUgbGFiZWwgYmFzZWQgb24gd2hldGhlciB0aGUgQVNHIGhhcyBhIHNwb3QgcHJpY2UuXG4gIC8vIGNvbnN0IGxpZmVjeWNsZUxhYmVsID0gYXV0b1NjYWxpbmdHcm91cC5zcG90UHJpY2UgPyBMaWZlY3ljbGVMYWJlbC5TUE9UIDogTGlmZWN5Y2xlTGFiZWwuT05fREVNQU5EO1xuICBjb25zdCBsaWZlY3ljbGVMYWJlbCA9IExpZmVjeWNsZUxhYmVsLlNQT1Q7XG4gIC8vIGNvbnN0IHdpdGhUYWludHMgPSBhdXRvU2NhbGluZ0dyb3VwLnNwb3RQcmljZSA/ICctLXJlZ2lzdGVyLXdpdGgtdGFpbnRzPXNwb3RJbnN0YW5jZT10cnVlOlByZWZlck5vU2NoZWR1bGUnIDogJyc7XG4gIGNvbnN0IHdpdGhUYWludHMgPSAnLS1yZWdpc3Rlci13aXRoLXRhaW50cz1zcG90SW5zdGFuY2U9dHJ1ZTpQcmVmZXJOb1NjaGVkdWxlJztcbiAgY29uc3Qga3ViZWxldEV4dHJhQXJncyA9IGAtLW5vZGUtbGFiZWxzIGxpZmVjeWNsZT0ke2xpZmVjeWNsZUxhYmVsfSAke3dpdGhUYWludHN9ICR7a3ViZWxldEV4dHJhQXJnc1N1ZmZpeH1gLnRyaW0oKTtcblxuICByZXR1cm4gW1xuICAgICdzZXQgLW8geHRyYWNlJyxcbiAgICBgL2V0Yy9la3MvYm9vdHN0cmFwLnNoICR7Y2x1c3Rlck5hbWV9IC0ta3ViZWxldC1leHRyYS1hcmdzIFwiJHtrdWJlbGV0RXh0cmFBcmdzfVwiICR7Y29tbWFuZExpbmVTdWZmaXh9YC50cmltKCksXG4gICAgYC9vcHQvYXdzL2Jpbi9jZm4tc2lnbmFsIC0tZXhpdC1jb2RlICQ/IC0tc3RhY2sgJHtzdGFjay5zdGFja05hbWV9IC0tcmVzb3VyY2UgJHtzcG90RmxlZXRMb2dpY2FsSWR9IC0tcmVnaW9uICR7c3RhY2sucmVnaW9ufWAsXG4gIF07XG59XG5cbi8qKlxuICogVGhlIGxpZmVjeWNsZSBsYWJlbCBmb3Igbm9kZSBzZWxlY3RvclxuICovXG5leHBvcnQgZW51bSBMaWZlY3ljbGVMYWJlbCB7XG4gIC8qKlxuICAgKiBvbi1kZW1hbmQgaW5zdGFuY2VzXG4gICAqL1xuICBPTl9ERU1BTkQgPSAnT25EZW1hbmQnLFxuICAvKipcbiAgICogc3BvdCBpbnN0YW5jZXNcbiAgICovXG4gIFNQT1QgPSAnRWMyU3BvdCdcbn0iXX0=
