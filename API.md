@@ -133,7 +133,9 @@ addSpotFleet(id: string, props: BaseSpotFleetProps): void
 
 * **id** (<code>string</code>)  *No description*
 * **props** (<code>[BaseSpotFleetProps](#eks-spot-blocks-basespotfleetprops)</code>)  *No description*
+  * **account** (<code>string</code>)  The AWS account ID this resource belongs to. __*Default*__: the resource is in the same account as the stack it belongs to
   * **physicalName** (<code>string</code>)  The value passed in by users to the physical name prop of the resource. __*Default*__: The physical name will be allocated by CloudFormation at deployment time
+  * **region** (<code>string</code>)  The AWS region this resource belongs to. __*Default*__: the resource is in the same region as the stack it belongs to
   * **blockDuration** (<code>[BlockDuration](#eks-spot-blocks-blockduration)</code>)  *No description* __*Optional*__
   * **bootstrapEnabled** (<code>boolean</code>)  *No description* __*Optional*__
   * **customAmiId** (<code>string</code>)  *No description* __*Optional*__
@@ -205,7 +207,9 @@ new SpotFleet(scope: Construct, id: string, props: SpotFleetProps)
 * **scope** (<code>[Construct](#aws-cdk-core-construct)</code>)  *No description*
 * **id** (<code>string</code>)  *No description*
 * **props** (<code>[SpotFleetProps](#eks-spot-blocks-spotfleetprops)</code>)  *No description*
+  * **account** (<code>string</code>)  The AWS account ID this resource belongs to. __*Default*__: the resource is in the same account as the stack it belongs to
   * **physicalName** (<code>string</code>)  The value passed in by users to the physical name prop of the resource. __*Default*__: The physical name will be allocated by CloudFormation at deployment time
+  * **region** (<code>string</code>)  The AWS region this resource belongs to. __*Default*__: the resource is in the same region as the stack it belongs to
   * **blockDuration** (<code>[BlockDuration](#eks-spot-blocks-blockduration)</code>)  *No description* __*Optional*__
   * **bootstrapEnabled** (<code>boolean</code>)  *No description* __*Optional*__
   * **customAmiId** (<code>string</code>)  *No description* __*Optional*__
@@ -245,6 +249,7 @@ Name | Type | Description
 
 Name | Type | Description 
 -----|------|-------------
+**account**?🔹 | <code>string</code> | The AWS account ID this resource belongs to.<br/>__*Default*__: the resource is in the same account as the stack it belongs to
 **blockDuration**?🔹 | <code>[BlockDuration](#eks-spot-blocks-blockduration)</code> | __*Optional*__
 **bootstrapEnabled**?🔹 | <code>boolean</code> | __*Optional*__
 **customAmiId**?🔹 | <code>string</code> | __*Optional*__
@@ -253,6 +258,7 @@ Name | Type | Description
 **instanceRole**?🔹 | <code>[Role](#aws-cdk-aws-iam-role)</code> | __*Optional*__
 **mapRole**?🔹 | <code>boolean</code> | __*Optional*__
 **physicalName**?🔹 | <code>string</code> | The value passed in by users to the physical name prop of the resource.<br/>__*Default*__: The physical name will be allocated by CloudFormation at deployment time
+**region**?🔹 | <code>string</code> | The AWS region this resource belongs to.<br/>__*Default*__: the resource is in the same region as the stack it belongs to
 **targetCapacity**?🔹 | <code>number</code> | __*Optional*__
 **terminateInstancesWithExpiration**?🔹 | <code>boolean</code> | __*Optional*__
 **validFrom**?🔹 | <code>string</code> | __*Optional*__
@@ -332,6 +338,7 @@ Name | Type | Description
 Name | Type | Description 
 -----|------|-------------
 **cluster**🔹 | <code>[EksSpotCluster](#eks-spot-blocks-eksspotcluster)</code> | <span></span>
+**account**?🔹 | <code>string</code> | The AWS account ID this resource belongs to.<br/>__*Default*__: the resource is in the same account as the stack it belongs to
 **blockDuration**?🔹 | <code>[BlockDuration](#eks-spot-blocks-blockduration)</code> | __*Optional*__
 **bootstrapEnabled**?🔹 | <code>boolean</code> | __*Optional*__
 **customAmiId**?🔹 | <code>string</code> | __*Optional*__
@@ -341,6 +348,7 @@ Name | Type | Description
 **launchTemplate**?🔹 | <code>[ILaunchtemplate](#eks-spot-blocks-ilaunchtemplate)</code> | __*Optional*__
 **mapRole**?🔹 | <code>boolean</code> | __*Optional*__
 **physicalName**?🔹 | <code>string</code> | The value passed in by users to the physical name prop of the resource.<br/>__*Default*__: The physical name will be allocated by CloudFormation at deployment time
+**region**?🔹 | <code>string</code> | The AWS region this resource belongs to.<br/>__*Default*__: the resource is in the same region as the stack it belongs to
 **targetCapacity**?🔹 | <code>number</code> | __*Optional*__
 **terminateInstancesWithExpiration**?🔹 | <code>boolean</code> | __*Optional*__
 **validFrom**?🔹 | <code>string</code> | __*Optional*__
