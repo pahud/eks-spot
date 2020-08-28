@@ -4,38 +4,38 @@
 
 Name|Description
 ----|-----------
-[EksSpotCluster](#cdk-serverless-api-eksspotcluster)|*No description*
-[LaunchTemplate](#cdk-serverless-api-launchtemplate)|*No description*
-[SpotFleet](#cdk-serverless-api-spotfleet)|*No description*
+[EksSpotCluster](#eks-spot-blocks-eksspotcluster)|*No description*
+[LaunchTemplate](#eks-spot-blocks-launchtemplate)|*No description*
+[SpotFleet](#eks-spot-blocks-spotfleet)|*No description*
 
 
 **Structs**
 
 Name|Description
 ----|-----------
-[BaseSpotFleetProps](#cdk-serverless-api-basespotfleetprops)|*No description*
-[EksSpotClusterProps](#cdk-serverless-api-eksspotclusterprops)|*No description*
-[SpotFleetLaunchTemplateConfig](#cdk-serverless-api-spotfleetlaunchtemplateconfig)|*No description*
-[SpotFleetProps](#cdk-serverless-api-spotfleetprops)|*No description*
+[BaseSpotFleetProps](#eks-spot-blocks-basespotfleetprops)|*No description*
+[EksSpotClusterProps](#eks-spot-blocks-eksspotclusterprops)|*No description*
+[SpotFleetLaunchTemplateConfig](#eks-spot-blocks-spotfleetlaunchtemplateconfig)|*No description*
+[SpotFleetProps](#eks-spot-blocks-spotfleetprops)|*No description*
 
 
 **Interfaces**
 
 Name|Description
 ----|-----------
-[ILaunchtemplate](#cdk-serverless-api-ilaunchtemplate)|*No description*
+[ILaunchtemplate](#eks-spot-blocks-ilaunchtemplate)|*No description*
 
 
 **Enums**
 
 Name|Description
 ----|-----------
-[BlockDuration](#cdk-serverless-api-blockduration)|*No description*
-[InstanceInterruptionBehavior](#cdk-serverless-api-instanceinterruptionbehavior)|*No description*
+[BlockDuration](#eks-spot-blocks-blockduration)|*No description*
+[InstanceInterruptionBehavior](#eks-spot-blocks-instanceinterruptionbehavior)|*No description*
 
 
 
-## class EksSpotCluster 🔹 <a id="cdk-serverless-api-eksspotcluster"></a>
+## class EksSpotCluster 🔹 <a id="eks-spot-blocks-eksspotcluster"></a>
 
 
 
@@ -53,7 +53,7 @@ new EksSpotCluster(scope: Construct, id: string, props: EksSpotClusterProps)
 
 * **scope** (<code>[Construct](#aws-cdk-core-construct)</code>)  *No description*
 * **id** (<code>string</code>)  *No description*
-* **props** (<code>[EksSpotClusterProps](#cdk-serverless-api-eksspotclusterprops)</code>)  *No description*
+* **props** (<code>[EksSpotClusterProps](#eks-spot-blocks-eksspotclusterprops)</code>)  *No description*
   * **description** (<code>string</code>)  A description of the stack. __*Default*__: No description.
   * **env** (<code>[Environment](#aws-cdk-core-environment)</code>)  The AWS environment (account/region) where this stack will be deployed. __*Default*__: The environment of the containing `Stage` if available, otherwise create the stack will be environment-agnostic.
   * **stackName** (<code>string</code>)  Name to deploy the stack with. __*Default*__: Derived from construct path.
@@ -63,7 +63,7 @@ new EksSpotCluster(scope: Construct, id: string, props: EksSpotClusterProps)
   * **clusterVersion** (<code>[KubernetesVersion](#aws-cdk-aws-eks-kubernetesversion)</code>)  *No description* 
   * **clusterAttributes** (<code>[ClusterAttributes](#aws-cdk-aws-eks-clusterattributes)</code>)  *No description* __*Optional*__
   * **customAmiId** (<code>string</code>)  Specify a custom AMI ID for your spot fleet. __*Default*__: none
-  * **instanceInterruptionBehavior** (<code>[InstanceInterruptionBehavior](#cdk-serverless-api-instanceinterruptionbehavior)</code>)  *No description* __*Optional*__
+  * **instanceInterruptionBehavior** (<code>[InstanceInterruptionBehavior](#eks-spot-blocks-instanceinterruptionbehavior)</code>)  *No description* __*Optional*__
   * **instanceRole** (<code>[IRole](#aws-cdk-aws-iam-irole)</code>)  *No description* __*Optional*__
   * **kubectlEnabled** (<code>boolean</code>)  *No description* __*Optional*__
 
@@ -81,7 +81,7 @@ Name | Type | Description
 ### Methods
 
 
-#### addDays(date, days)🔹 <a id="cdk-serverless-api-eksspotcluster-adddays"></a>
+#### addDays(date, days)🔹 <a id="eks-spot-blocks-eksspotcluster-adddays"></a>
 
 
 
@@ -95,7 +95,7 @@ addDays(date: date, days: number): date
 __Returns__:
 * <code>date</code>
 
-#### addHours(date, hours)🔹 <a id="cdk-serverless-api-eksspotcluster-addhours"></a>
+#### addHours(date, hours)🔹 <a id="eks-spot-blocks-eksspotcluster-addhours"></a>
 
 
 
@@ -109,7 +109,7 @@ addHours(date: date, hours: number): date
 __Returns__:
 * <code>date</code>
 
-#### addMinutes(date, minutes)🔹 <a id="cdk-serverless-api-eksspotcluster-addminutes"></a>
+#### addMinutes(date, minutes)🔹 <a id="eks-spot-blocks-eksspotcluster-addminutes"></a>
 
 
 
@@ -123,7 +123,7 @@ addMinutes(date: date, minutes: number): date
 __Returns__:
 * <code>date</code>
 
-#### addSpotFleet(id, props)🔹 <a id="cdk-serverless-api-eksspotcluster-addspotfleet"></a>
+#### addSpotFleet(id, props)🔹 <a id="eks-spot-blocks-eksspotcluster-addspotfleet"></a>
 
 
 
@@ -132,15 +132,15 @@ addSpotFleet(id: string, props: BaseSpotFleetProps): void
 ```
 
 * **id** (<code>string</code>)  *No description*
-* **props** (<code>[BaseSpotFleetProps](#cdk-serverless-api-basespotfleetprops)</code>)  *No description*
+* **props** (<code>[BaseSpotFleetProps](#eks-spot-blocks-basespotfleetprops)</code>)  *No description*
   * **account** (<code>string</code>)  The AWS account ID this resource belongs to. __*Default*__: the resource is in the same account as the stack it belongs to
   * **physicalName** (<code>string</code>)  The value passed in by users to the physical name prop of the resource. __*Default*__: The physical name will be allocated by CloudFormation at deployment time
   * **region** (<code>string</code>)  The AWS region this resource belongs to. __*Default*__: the resource is in the same region as the stack it belongs to
-  * **blockDuration** (<code>[BlockDuration](#cdk-serverless-api-blockduration)</code>)  *No description* __*Optional*__
+  * **blockDuration** (<code>[BlockDuration](#eks-spot-blocks-blockduration)</code>)  *No description* __*Optional*__
   * **bootstrapEnabled** (<code>boolean</code>)  *No description* __*Optional*__
   * **customAmiId** (<code>string</code>)  *No description* __*Optional*__
   * **defaultInstanceType** (<code>[InstanceType](#aws-cdk-aws-ec2-instancetype)</code>)  *No description* __*Optional*__
-  * **instanceInterruptionBehavior** (<code>[InstanceInterruptionBehavior](#cdk-serverless-api-instanceinterruptionbehavior)</code>)  *No description* __*Optional*__
+  * **instanceInterruptionBehavior** (<code>[InstanceInterruptionBehavior](#eks-spot-blocks-instanceinterruptionbehavior)</code>)  *No description* __*Optional*__
   * **instanceRole** (<code>[Role](#aws-cdk-aws-iam-role)</code>)  *No description* __*Optional*__
   * **mapRole** (<code>boolean</code>)  *No description* __*Optional*__
   * **targetCapacity** (<code>number</code>)  *No description* __*Optional*__
@@ -153,11 +153,11 @@ addSpotFleet(id: string, props: BaseSpotFleetProps): void
 
 
 
-## class LaunchTemplate 🔹 <a id="cdk-serverless-api-launchtemplate"></a>
+## class LaunchTemplate 🔹 <a id="eks-spot-blocks-launchtemplate"></a>
 
 
 
-__Implements__: [ILaunchtemplate](#cdk-serverless-api-ilaunchtemplate)
+__Implements__: [ILaunchtemplate](#eks-spot-blocks-ilaunchtemplate)
 
 ### Initializer
 
@@ -173,7 +173,7 @@ new LaunchTemplate()
 ### Methods
 
 
-#### bind(spotfleet)🔹 <a id="cdk-serverless-api-launchtemplate-bind"></a>
+#### bind(spotfleet)🔹 <a id="eks-spot-blocks-launchtemplate-bind"></a>
 
 
 
@@ -181,14 +181,14 @@ new LaunchTemplate()
 bind(spotfleet: SpotFleet): SpotFleetLaunchTemplateConfig
 ```
 
-* **spotfleet** (<code>[SpotFleet](#cdk-serverless-api-spotfleet)</code>)  *No description*
+* **spotfleet** (<code>[SpotFleet](#eks-spot-blocks-spotfleet)</code>)  *No description*
 
 __Returns__:
-* <code>[SpotFleetLaunchTemplateConfig](#cdk-serverless-api-spotfleetlaunchtemplateconfig)</code>
+* <code>[SpotFleetLaunchTemplateConfig](#eks-spot-blocks-spotfleetlaunchtemplateconfig)</code>
 
 
 
-## class SpotFleet 🔹 <a id="cdk-serverless-api-spotfleet"></a>
+## class SpotFleet 🔹 <a id="eks-spot-blocks-spotfleet"></a>
 
 
 
@@ -206,23 +206,23 @@ new SpotFleet(scope: Construct, id: string, props: SpotFleetProps)
 
 * **scope** (<code>[Construct](#aws-cdk-core-construct)</code>)  *No description*
 * **id** (<code>string</code>)  *No description*
-* **props** (<code>[SpotFleetProps](#cdk-serverless-api-spotfleetprops)</code>)  *No description*
+* **props** (<code>[SpotFleetProps](#eks-spot-blocks-spotfleetprops)</code>)  *No description*
   * **account** (<code>string</code>)  The AWS account ID this resource belongs to. __*Default*__: the resource is in the same account as the stack it belongs to
   * **physicalName** (<code>string</code>)  The value passed in by users to the physical name prop of the resource. __*Default*__: The physical name will be allocated by CloudFormation at deployment time
   * **region** (<code>string</code>)  The AWS region this resource belongs to. __*Default*__: the resource is in the same region as the stack it belongs to
-  * **blockDuration** (<code>[BlockDuration](#cdk-serverless-api-blockduration)</code>)  *No description* __*Optional*__
+  * **blockDuration** (<code>[BlockDuration](#eks-spot-blocks-blockduration)</code>)  *No description* __*Optional*__
   * **bootstrapEnabled** (<code>boolean</code>)  *No description* __*Optional*__
   * **customAmiId** (<code>string</code>)  *No description* __*Optional*__
   * **defaultInstanceType** (<code>[InstanceType](#aws-cdk-aws-ec2-instancetype)</code>)  *No description* __*Optional*__
-  * **instanceInterruptionBehavior** (<code>[InstanceInterruptionBehavior](#cdk-serverless-api-instanceinterruptionbehavior)</code>)  *No description* __*Optional*__
+  * **instanceInterruptionBehavior** (<code>[InstanceInterruptionBehavior](#eks-spot-blocks-instanceinterruptionbehavior)</code>)  *No description* __*Optional*__
   * **instanceRole** (<code>[Role](#aws-cdk-aws-iam-role)</code>)  *No description* __*Optional*__
   * **mapRole** (<code>boolean</code>)  *No description* __*Optional*__
   * **targetCapacity** (<code>number</code>)  *No description* __*Optional*__
   * **terminateInstancesWithExpiration** (<code>boolean</code>)  *No description* __*Optional*__
   * **validFrom** (<code>string</code>)  *No description* __*Optional*__
   * **validUntil** (<code>string</code>)  *No description* __*Optional*__
-  * **cluster** (<code>[EksSpotCluster](#cdk-serverless-api-eksspotcluster)</code>)  *No description* 
-  * **launchTemplate** (<code>[ILaunchtemplate](#cdk-serverless-api-ilaunchtemplate)</code>)  *No description* __*Optional*__
+  * **cluster** (<code>[EksSpotCluster](#eks-spot-blocks-eksspotcluster)</code>)  *No description* 
+  * **launchTemplate** (<code>[ILaunchtemplate](#eks-spot-blocks-ilaunchtemplate)</code>)  *No description* __*Optional*__
 
 
 
@@ -231,16 +231,16 @@ new SpotFleet(scope: Construct, id: string, props: SpotFleetProps)
 
 Name | Type | Description 
 -----|------|-------------
-**clusterStack**🔹 | <code>[EksSpotCluster](#cdk-serverless-api-eksspotcluster)</code> | <span></span>
+**clusterStack**🔹 | <code>[EksSpotCluster](#eks-spot-blocks-eksspotcluster)</code> | <span></span>
 **defaultInstanceType**🔹 | <code>[InstanceType](#aws-cdk-aws-ec2-instancetype)</code> | <span></span>
 **instanceRole**🔹 | <code>[IRole](#aws-cdk-aws-iam-irole)</code> | <span></span>
-**launchTemplate**🔹 | <code>[ILaunchtemplate](#cdk-serverless-api-ilaunchtemplate)</code> | <span></span>
+**launchTemplate**🔹 | <code>[ILaunchtemplate](#eks-spot-blocks-ilaunchtemplate)</code> | <span></span>
 **spotFleetId**🔹 | <code>string</code> | <span></span>
 **targetCapacity**?🔹 | <code>number</code> | __*Optional*__
 
 
 
-## struct BaseSpotFleetProps 🔹 <a id="cdk-serverless-api-basespotfleetprops"></a>
+## struct BaseSpotFleetProps 🔹 <a id="eks-spot-blocks-basespotfleetprops"></a>
 
 
 
@@ -250,11 +250,11 @@ Name | Type | Description
 Name | Type | Description 
 -----|------|-------------
 **account**?🔹 | <code>string</code> | The AWS account ID this resource belongs to.<br/>__*Default*__: the resource is in the same account as the stack it belongs to
-**blockDuration**?🔹 | <code>[BlockDuration](#cdk-serverless-api-blockduration)</code> | __*Optional*__
+**blockDuration**?🔹 | <code>[BlockDuration](#eks-spot-blocks-blockduration)</code> | __*Optional*__
 **bootstrapEnabled**?🔹 | <code>boolean</code> | __*Optional*__
 **customAmiId**?🔹 | <code>string</code> | __*Optional*__
 **defaultInstanceType**?🔹 | <code>[InstanceType](#aws-cdk-aws-ec2-instancetype)</code> | __*Optional*__
-**instanceInterruptionBehavior**?🔹 | <code>[InstanceInterruptionBehavior](#cdk-serverless-api-instanceinterruptionbehavior)</code> | __*Optional*__
+**instanceInterruptionBehavior**?🔹 | <code>[InstanceInterruptionBehavior](#eks-spot-blocks-instanceinterruptionbehavior)</code> | __*Optional*__
 **instanceRole**?🔹 | <code>[Role](#aws-cdk-aws-iam-role)</code> | __*Optional*__
 **mapRole**?🔹 | <code>boolean</code> | __*Optional*__
 **physicalName**?🔹 | <code>string</code> | The value passed in by users to the physical name prop of the resource.<br/>__*Default*__: The physical name will be allocated by CloudFormation at deployment time
@@ -266,7 +266,7 @@ Name | Type | Description
 
 
 
-## struct EksSpotClusterProps 🔹 <a id="cdk-serverless-api-eksspotclusterprops"></a>
+## struct EksSpotClusterProps 🔹 <a id="eks-spot-blocks-eksspotclusterprops"></a>
 
 
 
@@ -280,7 +280,7 @@ Name | Type | Description
 **customAmiId**?🔹 | <code>string</code> | Specify a custom AMI ID for your spot fleet.<br/>__*Default*__: none
 **description**?🔹 | <code>string</code> | A description of the stack.<br/>__*Default*__: No description.
 **env**?🔹 | <code>[Environment](#aws-cdk-core-environment)</code> | The AWS environment (account/region) where this stack will be deployed.<br/>__*Default*__: The environment of the containing `Stage` if available, otherwise create the stack will be environment-agnostic.
-**instanceInterruptionBehavior**?🔹 | <code>[InstanceInterruptionBehavior](#cdk-serverless-api-instanceinterruptionbehavior)</code> | __*Optional*__
+**instanceInterruptionBehavior**?🔹 | <code>[InstanceInterruptionBehavior](#eks-spot-blocks-instanceinterruptionbehavior)</code> | __*Optional*__
 **instanceRole**?🔹 | <code>[IRole](#aws-cdk-aws-iam-irole)</code> | __*Optional*__
 **kubectlEnabled**?🔹 | <code>boolean</code> | __*Optional*__
 **stackName**?🔹 | <code>string</code> | Name to deploy the stack with.<br/>__*Default*__: Derived from construct path.
@@ -290,15 +290,15 @@ Name | Type | Description
 
 
 
-## interface ILaunchtemplate 🔹 <a id="cdk-serverless-api-ilaunchtemplate"></a>
+## interface ILaunchtemplate 🔹 <a id="eks-spot-blocks-ilaunchtemplate"></a>
 
-__Implemented by__: [LaunchTemplate](#cdk-serverless-api-launchtemplate)
+__Implemented by__: [LaunchTemplate](#eks-spot-blocks-launchtemplate)
 
 
 ### Methods
 
 
-#### bind(spotfleet)🔹 <a id="cdk-serverless-api-ilaunchtemplate-bind"></a>
+#### bind(spotfleet)🔹 <a id="eks-spot-blocks-ilaunchtemplate-bind"></a>
 
 
 
@@ -306,30 +306,16 @@ __Implemented by__: [LaunchTemplate](#cdk-serverless-api-launchtemplate)
 bind(spotfleet: SpotFleet): SpotFleetLaunchTemplateConfig
 ```
 
-* **spotfleet** (<code>[SpotFleet](#cdk-serverless-api-spotfleet)</code>)  *No description*
+* **spotfleet** (<code>[SpotFleet](#eks-spot-blocks-spotfleet)</code>)  *No description*
 
 __Returns__:
-* <code>[SpotFleetLaunchTemplateConfig](#cdk-serverless-api-spotfleetlaunchtemplateconfig)</code>
+* <code>[SpotFleetLaunchTemplateConfig](#eks-spot-blocks-spotfleetlaunchtemplateconfig)</code>
 
 
 
-## struct SpotFleetLaunchTemplateConfig 🔹 <a id="cdk-serverless-api-spotfleetlaunchtemplateconfig"></a>
+## struct SpotFleetLaunchTemplateConfig 🔹 <a id="eks-spot-blocks-spotfleetlaunchtemplateconfig"></a>
 
-__Obtainable from__: [LaunchTemplate](#cdk-serverless-api-launchtemplate).[bind](#cdk-serverless-api-launchtemplate#cdk-serverless-api-launchtemplate-bind)()
-
-
-
-
-
-Name | Type | Description 
------|------|-------------
-**launchTemplate**🔹 | <code>[ILaunchtemplate](#cdk-serverless-api-ilaunchtemplate)</code> | <span></span>
-**spotfleet**🔹 | <code>[SpotFleet](#cdk-serverless-api-spotfleet)</code> | <span></span>
-
-
-
-## struct SpotFleetProps 🔹 <a id="cdk-serverless-api-spotfleetprops"></a>
-
+__Obtainable from__: [LaunchTemplate](#eks-spot-blocks-launchtemplate).[bind](#eks-spot-blocks-launchtemplate#eks-spot-blocks-launchtemplate-bind)()
 
 
 
@@ -337,15 +323,29 @@ Name | Type | Description
 
 Name | Type | Description 
 -----|------|-------------
-**cluster**🔹 | <code>[EksSpotCluster](#cdk-serverless-api-eksspotcluster)</code> | <span></span>
+**launchTemplate**🔹 | <code>[ILaunchtemplate](#eks-spot-blocks-ilaunchtemplate)</code> | <span></span>
+**spotfleet**🔹 | <code>[SpotFleet](#eks-spot-blocks-spotfleet)</code> | <span></span>
+
+
+
+## struct SpotFleetProps 🔹 <a id="eks-spot-blocks-spotfleetprops"></a>
+
+
+
+
+
+
+Name | Type | Description 
+-----|------|-------------
+**cluster**🔹 | <code>[EksSpotCluster](#eks-spot-blocks-eksspotcluster)</code> | <span></span>
 **account**?🔹 | <code>string</code> | The AWS account ID this resource belongs to.<br/>__*Default*__: the resource is in the same account as the stack it belongs to
-**blockDuration**?🔹 | <code>[BlockDuration](#cdk-serverless-api-blockduration)</code> | __*Optional*__
+**blockDuration**?🔹 | <code>[BlockDuration](#eks-spot-blocks-blockduration)</code> | __*Optional*__
 **bootstrapEnabled**?🔹 | <code>boolean</code> | __*Optional*__
 **customAmiId**?🔹 | <code>string</code> | __*Optional*__
 **defaultInstanceType**?🔹 | <code>[InstanceType](#aws-cdk-aws-ec2-instancetype)</code> | __*Optional*__
-**instanceInterruptionBehavior**?🔹 | <code>[InstanceInterruptionBehavior](#cdk-serverless-api-instanceinterruptionbehavior)</code> | __*Optional*__
+**instanceInterruptionBehavior**?🔹 | <code>[InstanceInterruptionBehavior](#eks-spot-blocks-instanceinterruptionbehavior)</code> | __*Optional*__
 **instanceRole**?🔹 | <code>[Role](#aws-cdk-aws-iam-role)</code> | __*Optional*__
-**launchTemplate**?🔹 | <code>[ILaunchtemplate](#cdk-serverless-api-ilaunchtemplate)</code> | __*Optional*__
+**launchTemplate**?🔹 | <code>[ILaunchtemplate](#eks-spot-blocks-ilaunchtemplate)</code> | __*Optional*__
 **mapRole**?🔹 | <code>boolean</code> | __*Optional*__
 **physicalName**?🔹 | <code>string</code> | The value passed in by users to the physical name prop of the resource.<br/>__*Default*__: The physical name will be allocated by CloudFormation at deployment time
 **region**?🔹 | <code>string</code> | The AWS region this resource belongs to.<br/>__*Default*__: the resource is in the same region as the stack it belongs to
@@ -356,7 +356,7 @@ Name | Type | Description
 
 
 
-## enum BlockDuration 🔹 <a id="cdk-serverless-api-blockduration"></a>
+## enum BlockDuration 🔹 <a id="eks-spot-blocks-blockduration"></a>
 
 
 
@@ -370,7 +370,7 @@ Name | Description
 **SIX_HOURS** 🔹|
 
 
-## enum InstanceInterruptionBehavior 🔹 <a id="cdk-serverless-api-instanceinterruptionbehavior"></a>
+## enum InstanceInterruptionBehavior 🔹 <a id="eks-spot-blocks-instanceinterruptionbehavior"></a>
 
 
 
