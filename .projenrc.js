@@ -10,7 +10,7 @@ const PROJECT_DESCRIPTION = 'A sample JSII construct lib for AWS CDK';
 const project = new ConstructLibraryAws({
   name: PROJECT_NAME,
   description: PROJECT_DESCRIPTION,
-  repository: 'https://github.com/pahud/eks-spot-blocks.git',
+  repository: 'https://github.com/pahud/cdk-eks-spotblocks.git',
   authorName: 'Pahud Hsieh',
   authorEmail: 'pahudnet@gmail.com',
   stability: 'experimental',
