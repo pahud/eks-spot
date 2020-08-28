@@ -1,41 +1,45 @@
 const {
-  JsiiProject,
-  Semver
+  ConstructLibraryAws,
 } = require('projen');
 
-const AWS_CDK_LATEST_RELEASE = '1.60.0';
-const CONSTRUCTS_VERSION = '3.0.4';
+const AWS_CDK_LATEST_RELEASE = '1.61.0';
+const PROJECT_NAME = 'cdk-serverless-api';
+const PROJECT_DESCRIPTION = 'A sample JSII construct lib for AWS CDK';
 
-const project = new JsiiProject({
-  name: 'eks-spot-blocks',
-  jsiiVersion: Semver.caret('1.5.0'),
-  description: 'eks spot blocks constructs for awscdk',
+
+const project = new ConstructLibraryAws({
+  name: PROJECT_NAME,
+  description: PROJECT_DESCRIPTION,
   repository: 'https://github.com/pahud/eks-spot-blocks.git',
   authorName: 'Pahud Hsieh',
   authorEmail: 'pahudnet@gmail.com',
   stability: 'experimental',
-  devDependencies: {
-    '@aws-cdk/assert': Semver.pinned(AWS_CDK_LATEST_RELEASE),
-    '@types/jest': Semver.caret('25.2.3'),
-    '@types/node': Semver.caret('14.0.11'),
-    'dot-prop': Semver.caret('5.1.1'),
+
+  keywords: [
+    'cdk',
+    'aws',
+    'eks',
+    'spot',
+    'spot-blocks'
+  ],
+
+  catalog: {
+    twitter: 'pahudnet',
+    announce: false,
   },
-  peerDependencies: {
-    'constructs': Semver.pinned(CONSTRUCTS_VERSION),
-    '@aws-cdk/core': Semver.pinned(AWS_CDK_LATEST_RELEASE),
-    '@aws-cdk/aws-ec2': Semver.pinned(AWS_CDK_LATEST_RELEASE),
-    '@aws-cdk/aws-eks': Semver.pinned(AWS_CDK_LATEST_RELEASE),
-    '@aws-cdk/aws-iam': Semver.pinned(AWS_CDK_LATEST_RELEASE),
-    '@aws-cdk/aws-ssm': Semver.pinned(AWS_CDK_LATEST_RELEASE),
-  },
-  dependencies: {
-    'constructs': Semver.pinned(CONSTRUCTS_VERSION),
-    '@aws-cdk/core': Semver.pinned(AWS_CDK_LATEST_RELEASE),
-    '@aws-cdk/aws-ec2': Semver.pinned(AWS_CDK_LATEST_RELEASE),
-    '@aws-cdk/aws-eks': Semver.pinned(AWS_CDK_LATEST_RELEASE),
-    '@aws-cdk/aws-iam': Semver.pinned(AWS_CDK_LATEST_RELEASE),
-    '@aws-cdk/aws-ssm': Semver.pinned(AWS_CDK_LATEST_RELEASE),
-  },
+
+  // creates PRs for projen upgrades
+  projenUpgradeSecret: 'PROJEN_GITHUB_TOKEN',
+
+  cdkVersion: AWS_CDK_LATEST_RELEASE,
+  cdkDependencies: [
+    '@aws-cdk/core',
+    '@aws-cdk/aws-ec2',
+    '@aws-cdk/aws-eks',
+    '@aws-cdk/aws-iam',
+    '@aws-cdk/aws-ssm',
+  ],
+
   python: {
     distName: 'eks-spot-blocks',
     module: 'eks_spot_blocks'
@@ -46,22 +50,11 @@ project.addFields({
   'keywords': [
     'cdk',
     'aws',
-    'eks',
-    'spot',
-    'spot-blocks'
   ]
 });
 
-project.addFields({
-  awscdkio: {
-    twitter: '@pahudnet',
-    announce: false
-  }
-});
-
-const common_exclude = ['cdk.out', 'cdk.context.json', 'docker-compose.yml', 'images', 'yarn-error.log']
-project.npmignore.exclude(...common_exclude, '/codebase');
+const common_exclude = ['cdk.out', 'cdk.context.json', 'images', 'yarn-error.log'];
+project.npmignore.exclude(...common_exclude);
 project.gitignore.exclude(...common_exclude);
-
 
 project.synth();

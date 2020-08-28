@@ -14,10 +14,8 @@ dist
 /test
 cdk.out
 cdk.context.json
-docker-compose.yml
 images
 yarn-error.log
-/codebase
 !/lib
 !/lib/**/*.js
 !/lib/**/*.d.ts
