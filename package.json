@@ -70,8 +70,11 @@
   },
   "bundledDependencies": [],
   "keywords": [
+    "aws",
     "cdk",
-    "aws"
+    "eks",
+    "spot",
+    "spot-blocks"
   ],
   "engines": {
     "node": ">= 10.17.0"

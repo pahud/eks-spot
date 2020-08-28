@@ -46,13 +46,6 @@ const project = new ConstructLibraryAws({
   }
 });
 
-project.addFields({
-  'keywords': [
-    'cdk',
-    'aws',
-  ]
-});
-
 const common_exclude = ['cdk.out', 'cdk.context.json', 'images', 'yarn-error.log'];
 project.npmignore.exclude(...common_exclude);
 project.gitignore.exclude(...common_exclude);
