@@ -1,5 +1,5 @@
-# `cdk-eks-spotblocks`
-
+# cdk-eks-spotblocks
+[![awscdk-jsii-template](https://img.shields.io/badge/built%20with-awscdk--jsii--template-blue)](https://github.com/pahud/awscdk-jsii-template)
 [![NPM version](https://badge.fury.io/js/eks-spot-blocks.svg)](https://badge.fury.io/js/eks-spot-blocks)
 [![PyPI version](https://badge.fury.io/py/eks-spot-blocks.svg)](https://badge.fury.io/py/eks-spot-blocks)
 ![Release](https://github.com/pahud/eks-spot-blocks/workflows/Release/badge.svg)
