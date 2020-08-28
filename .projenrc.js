@@ -1,10 +1,13 @@
 const {
   ConstructLibraryAws,
+  Semver,
 } = require('projen');
 
 const AWS_CDK_LATEST_RELEASE = '1.61.1';
+const PROJEN_PINNED_VERSION = '0.3.47';
 const PROJECT_NAME = 'cdk-serverless-api';
 const PROJECT_DESCRIPTION = 'A sample JSII construct lib for AWS CDK';
+
 
 
 const project = new ConstructLibraryAws({
@@ -31,6 +34,7 @@ const project = new ConstructLibraryAws({
   // creates PRs for projen upgrades
   projenUpgradeSecret: 'PROJEN_GITHUB_TOKEN',
 
+
   cdkVersion: AWS_CDK_LATEST_RELEASE,
   cdkDependencies: [
     '@aws-cdk/core',
@@ -40,14 +44,20 @@ const project = new ConstructLibraryAws({
     '@aws-cdk/aws-ssm',
   ],
 
+
   python: {
     distName: 'eks-spot-blocks',
     module: 'eks_spot_blocks'
   }
 });
 
+if (PROJEN_PINNED_VERSION) {
+  project.devDependencies.projen = PROJEN_PINNED_VERSION;
+}
+
 const common_exclude = ['cdk.out', 'cdk.context.json', 'images', 'yarn-error.log'];
 project.npmignore.exclude(...common_exclude);
 project.gitignore.exclude(...common_exclude);
+
 
 project.synth();
