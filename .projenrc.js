@@ -4,7 +4,7 @@ const {
 } = require('projen');
 
 const AWS_CDK_LATEST_RELEASE = '1.61.1';
-const PROJEN_PINNED_VERSION = '0.3.47';
+const PROJEN_PINNED_VERSION = '0.3.50';
 const PROJECT_NAME = 'eks-spot-blocks';
 const PROJECT_DESCRIPTION = 'A sample JSII construct lib for AWS CDK';
 
