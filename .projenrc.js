@@ -4,7 +4,6 @@ const {
 } = require('projen');
 
 const AWS_CDK_LATEST_RELEASE = '1.61.1';
-const PROJEN_PINNED_VERSION = '0.3.50';
 const PROJECT_NAME = 'eks-spot-blocks';
 const PROJECT_DESCRIPTION = 'A sample JSII construct lib for AWS CDK';
 
@@ -48,10 +47,6 @@ const project = new ConstructLibraryAws({
     module: 'eks_spot_blocks'
   }
 });
-
-if (PROJEN_PINNED_VERSION) {
-  project.devDependencies.projen = PROJEN_PINNED_VERSION;
-}
 
 const common_exclude = ['cdk.out', 'cdk.context.json', 'images', 'yarn-error.log'];
 project.npmignore.exclude(...common_exclude);
