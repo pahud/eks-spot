@@ -1,6 +1,4 @@
 # Automatically approve yarn upgrade PRs made by github-actions[bot]
-#
-#
 # Only does approvals! A different GitHub Action takes care of merging.
 name: Auto-approve YarnUpgrade
 on:
