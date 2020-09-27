@@ -2,7 +2,7 @@
 #
 #
 # Only does approvals! A different GitHub Action takes care of merging.
-name: Auto-approve Dependabot
+name: Auto-approve YarnUpgrade
 on:
   pull_request:
     types:
