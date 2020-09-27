@@ -1,0 +1,21 @@
+name: Build
+on:
+  schedule:
+  - cron: 0 0 * * 3
+  workflow_dispatch: {}
+jobs:
+  upgrade:
+    runs-on: ubuntu-latest
+    env:
+      CI: "true"
+    steps:
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 10.17.0
+      - name: Set git identity
+        run: |-
+          git config user.name "Auto-yarn-upgrade"
+          git config user.email "github-actions@github.com"
+      - run: yarn upgrade --latest
+    container:
+      image: jsii/superchain
