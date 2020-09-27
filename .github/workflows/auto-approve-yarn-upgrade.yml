@@ -16,6 +16,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: hmarr/auto-approve-action@v2.0.0
-      if: ${{ contains(github.event.pull_request.title, 'yarn upgrade') }}
       with:
         github-token: "${{ secrets.GITHUB_TOKEN }}"
