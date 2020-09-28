@@ -1,7 +1,7 @@
 name: YarnUpgrade
 on:
   schedule:
-  - cron: 0 0 * * 3
+  - cron: 0 0 * * *
   workflow_dispatch: {}
 jobs:
   upgrade:
@@ -22,7 +22,7 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.AUTOMATION_GITHUB_TOKEN }}
           commit-message: "chore: yarn upgradae"
           branch: auto/yarn-upgrade
           title: "chore: yarn upgrade"
