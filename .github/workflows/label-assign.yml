@@ -4,6 +4,7 @@ on:
     types:
       - opened
       - reopened
+      - edited
 
 jobs:
   label:
@@ -11,6 +12,11 @@ jobs:
     steps:
       - uses: Naturalclar/issue-action@f229cda
         with:
-          title-or-body: "title"
-          parameters: '[ {"keywords": ["yarn"], "labels": ["yarn"], "assignees": ["pahud"]}]'
           github-token: "${{ secrets.GITHUB_TOKEN }}"
+          title-or-body: "title"
+          parameters: >
+            [
+            {"keywords":["yarn upgrade","upgrade yarn"],"labels":["yarn/upgrade"],"assignees":["pahud"]},
+            {"keywords":["projen upgrade","upgrade projen"],"labels":["projen/upgrade"],"assignees":["pahud"]}
+            ]
+          
