@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 0.2.62 (2020-09-29)
+
+
+### Features
+
+* **mergify:** allow mergify to auto-merge projen upgrade PRs once build passes ([1739897](https://github.com/pahud/cdk-eks-spotblocks/commit/1739897afe7a8835d9599ec4c3dfed9fa6f81f26))
+
 ### 0.2.61 (2020-09-29)
 
 ### 0.2.60 (2020-09-29)
