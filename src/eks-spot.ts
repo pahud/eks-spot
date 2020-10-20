@@ -1,11 +1,11 @@
-import { Stack, StackProps, Construct, Resource, ResourceProps, PhysicalName, Fn } from '@aws-cdk/core';
-import * as eks from '@aws-cdk/aws-eks';
-import { renderAmazonLinuxUserData } from './user-data';
-import * as iam from '@aws-cdk/aws-iam';
 import * as ec2 from '@aws-cdk/aws-ec2';
+import * as eks from '@aws-cdk/aws-eks';
+import * as iam from '@aws-cdk/aws-iam';
+import { Stack, StackProps, Construct, Resource, ResourceProps, PhysicalName, Fn } from '@aws-cdk/core';
 import { LaunchTemplate, ILaunchtemplate } from './launch-template';
+import { renderAmazonLinuxUserData } from './user-data';
 
-const DEFAULT_INSTANCE_TYPE = 't3.large'
+const DEFAULT_INSTANCE_TYPE = 't3.large';
 
 export enum BlockDuration {
   ONE_HOUR = 60,
@@ -31,7 +31,7 @@ export interface EksSpotClusterProps extends StackProps {
   /**
      * Specify a custom AMI ID for your spot fleet. By default the Amazon EKS-optimized
      * AMI will be selected.
-     * 
+     *
      * @default - none
      */
   readonly customAmiId?: string;
@@ -66,14 +66,14 @@ export class EksSpotCluster extends Resource {
       mastersRole: clusterAdmin,
       defaultCapacity: 0,
       version: this.clusterVersion,
-    })
+    });
   }
 
   public addSpotFleet(id: string, props: BaseSpotFleetProps) {
     new SpotFleet(this, id, {
       cluster: this,
       ...props,
-    })
+    });
   }
 
   public addDays(date: Date, days: number): Date {
@@ -122,13 +122,13 @@ export class SpotFleet extends Resource {
 
 
   constructor(scope: Construct, id: string, props: SpotFleetProps) {
-    super(scope, id, props)
+    super(scope, id, props);
 
-    this.spotFleetId = id
-    this.clusterStack = props.cluster
-    this.launchTemplate = props.launchTemplate ?? new LaunchTemplate()
-    this.targetCapacity = props.targetCapacity
-    this.defaultInstanceType = props.defaultInstanceType ?? new ec2.InstanceType(DEFAULT_INSTANCE_TYPE)
+    this.spotFleetId = id;
+    this.clusterStack = props.cluster;
+    this.launchTemplate = props.launchTemplate ?? new LaunchTemplate();
+    this.targetCapacity = props.targetCapacity;
+    this.defaultInstanceType = props.defaultInstanceType ?? new ec2.InstanceType(DEFAULT_INSTANCE_TYPE);
 
     // isntance role
     this.instanceRole = props.instanceRole || new iam.Role(this, 'InstanceRole', {
@@ -142,11 +142,11 @@ export class SpotFleet extends Resource {
 
     const instanceProfile = new iam.CfnInstanceProfile(this, 'InstanceProfile', {
       roles: [this.instanceRole.roleName],
-    })
+    });
 
     const sg = new ec2.SecurityGroup(this, 'SpotFleetSg', {
       vpc: this.clusterStack.cluster.vpc,
-    })
+    });
 
     // self rules
     sg.connections.allowInternally(ec2.Port.allTraffic());
@@ -163,18 +163,18 @@ export class SpotFleet extends Resource {
     sg.connections.allowToAnyIpv4(ec2.Port.allUdp());
     sg.connections.allowToAnyIpv4(ec2.Port.allIcmp());
 
-    const config = this.launchTemplate.bind(this)
+    const config = this.launchTemplate.bind(this);
 
     // const userData = renderAmazonLinuxUserData(cdk.Stack.of(this), this.cluster.clusterName, config.spotfleet);
-    const userData = ec2.UserData.forLinux()
+    const userData = ec2.UserData.forLinux();
     userData.addCommands(...renderAmazonLinuxUserData(Stack.of(this), this.clusterStack.cluster.clusterName, config.spotfleet));
 
-    this.defaultInstanceType = props.defaultInstanceType ?? new ec2.InstanceType(DEFAULT_INSTANCE_TYPE)
+    this.defaultInstanceType = props.defaultInstanceType ?? new ec2.InstanceType(DEFAULT_INSTANCE_TYPE);
 
     const imageId = props.customAmiId ?? new eks.EksOptimizedImage({
       nodeType: nodeTypeForInstanceType(this.defaultInstanceType),
       kubernetesVersion: props.cluster.clusterVersion.version,
-    }).getImage(this).imageId
+    }).getImage(this).imageId;
 
     const lt = new ec2.CfnLaunchTemplate(this, 'LaunchTemplate', {
       launchTemplateData: {
@@ -192,7 +192,7 @@ export class SpotFleet extends Resource {
                 key: `kubernetes.io/cluster/${this.clusterStack.cluster.clusterName}`,
                 value: 'owned',
               },
-            
+
             ],
           },
         ],
@@ -210,19 +210,19 @@ export class SpotFleet extends Resource {
           arn: instanceProfile.attrArn,
         },
       },
-    })
+    });
 
     const spotFleetRole = new iam.Role(this, 'FleetRole', {
       assumedBy: new iam.ServicePrincipal('spotfleet.amazonaws.com'),
       managedPolicies: [
         iam.ManagedPolicy.fromAwsManagedPolicyName('service-role/AmazonEC2SpotFleetTaggingRole'),
       ],
-    })
+    });
 
 
-    const overrides = []
+    const overrides = [];
     for (const s of this.clusterStack.cluster.vpc.privateSubnets) {
-      overrides.push({ subnetId: s.subnetId })
+      overrides.push({ subnetId: s.subnetId });
     }
     new ec2.CfnSpotFleet(this, id, {
       spotFleetRequestConfigData: {
@@ -241,7 +241,7 @@ export class SpotFleet extends Resource {
         validUntil: props.validUntil,
         terminateInstancesWithExpiration: props.terminateInstancesWithExpiration,
       },
-    })
+    });
 
     this.clusterStack.cluster.awsAuth.addRoleMapping(this.instanceRole, {
       username: 'system:node:{{EC2PrivateDNSName}}',
@@ -250,7 +250,7 @@ export class SpotFleet extends Resource {
         'system:nodes',
       ],
     });
-    
+
   }
 }
 

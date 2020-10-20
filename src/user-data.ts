@@ -1,5 +1,5 @@
-import { Stack } from '@aws-cdk/core';
 import { BootstrapOptions } from '@aws-cdk/aws-eks/lib/cluster';
+import { Stack } from '@aws-cdk/core';
 import { SpotFleet } from './eks-spot';
 
 // tslint:disable-next-line:max-line-length
@@ -10,7 +10,7 @@ export function renderAmazonLinuxUserData(scope: Stack, clusterName: string, spo
   // determine logical id of ASG so we can signal cloudformation
   // const cfn = spotFleet.node.defaultChild as autoscaling.CfnAutoScalingGroup;
   // const asgLogicalId = cfn.logicalId;
-  const spotFleetLogicalId = spotFleet.node.id
+  const spotFleetLogicalId = spotFleet.node.id;
 
   const extraArgs = new Array<string>();
 

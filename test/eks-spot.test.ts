@@ -1,7 +1,7 @@
 import '@aws-cdk/assert/jest';
+import * as eks from '@aws-cdk/aws-eks';
 import * as cdk from '@aws-cdk/core';
 import * as EksSpot from '../src';
-import * as eks from '@aws-cdk/aws-eks';
 
 test('create cluster only', () => {
   const app = new cdk.App();

@@ -1,7 +1,7 @@
 import { SpotFleet } from './eks-spot';
 
 export interface SpotFleetLaunchTemplateConfig {
-  readonly spotfleet: SpotFleet
+  readonly spotfleet: SpotFleet;
   readonly launchTemplate: ILaunchtemplate;
 }
 
@@ -14,6 +14,6 @@ export class LaunchTemplate implements ILaunchtemplate {
     return {
       spotfleet,
       launchTemplate: this,
-    }
+    };
   }
 }
