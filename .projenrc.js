@@ -14,7 +14,6 @@ const project = new AwsCdkConstructLibrary({
   repository: 'https://github.com/pahud/cdk-eks-spotblocks.git',
   authorName: 'Pahud Hsieh',
   authorEmail: 'pahudnet@gmail.com',
-  stability: 'experimental',
   keywords: [
     'cdk',
     'aws',
@@ -22,6 +21,7 @@ const project = new AwsCdkConstructLibrary({
     'spot',
     'spot-blocks'
   ],
+  compat: true,
 
   catalog: {
     twitter: 'pahudnet',
