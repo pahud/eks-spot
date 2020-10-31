@@ -22,12 +22,11 @@ const project = new AwsCdkConstructLibrary({
     'spot-blocks'
   ],
   compat: true,
-
+  dependabot: false,
   catalog: {
     twitter: 'pahudnet',
     announce: false,
   },
-
   cdkVersion: AWS_CDK_LATEST_RELEASE,
   cdkDependencies: [
     '@aws-cdk/core',
