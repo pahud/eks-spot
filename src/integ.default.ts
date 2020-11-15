@@ -26,7 +26,7 @@ export class IntegTesting {
       blockDuration: eksspot.BlockDuration.SIX_HOURS,
       targetCapacity: 1,
       defaultInstanceType: new ec2.InstanceType('p3.2xlarge'),
-      validUntil: eksSpotCluter.addHours(new Date(), 6).toISOString(),
+      // validUntil: eksSpotCluter.addHours(new Date(), 6).toISOString(),
       terminateInstancesWithExpiration: true,
     });
 
@@ -34,7 +34,7 @@ export class IntegTesting {
       blockDuration: eksspot.BlockDuration.ONE_HOUR,
       targetCapacity: 2,
       defaultInstanceType: new ec2.InstanceType('c5.large'),
-      validUntil: eksSpotCluter.addHours(new Date(), 1).toISOString(),
+      // validUntil: eksSpotCluter.addHours(new Date(), 1).toISOString(),
       terminateInstancesWithExpiration: true,
     });
 
