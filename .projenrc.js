@@ -1,5 +1,4 @@
-const {
-  AwsCdkConstructLibrary } = require('projen');
+const { AwsCdkConstructLibrary } = require('projen');
 
 const AWS_CDK_LATEST_RELEASE = '1.79.0';
 const PROJECT_NAME = 'eks-spot-blocks';
@@ -17,7 +16,7 @@ const project = new AwsCdkConstructLibrary({
     'aws',
     'eks',
     'spot',
-    'spot-blocks'
+    'spot-blocks',
   ],
   compat: true,
   dependabot: false,
@@ -37,8 +36,8 @@ const project = new AwsCdkConstructLibrary({
 
   python: {
     distName: 'eks-spot-blocks',
-    module: 'eks_spot_blocks'
-  }
+    module: 'eks_spot_blocks',
+  },
 });
 
 // create a custom projen and yarn upgrade workflow
@@ -80,7 +79,6 @@ workflow.addJobs({
     ],
   },
 });
-
 
 
 const common_exclude = ['cdk.out', 'cdk.context.json', 'images', 'yarn-error.log'];
