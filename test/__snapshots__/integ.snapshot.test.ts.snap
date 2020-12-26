@@ -89,18 +89,6 @@ Object {
       "Description": "S3 key for asset version \\"c691172cdeefa2c91b5a2907f9d81118e47597634943344795f1a844192dd49c\\"",
       "Type": "String",
     },
-    "AssetParametersc96d44225292c4d60ff6f1d3d25c1245f535a1568d1d5e4f96f4537686a6e0f7ArtifactHash8B6ADB9C": Object {
-      "Description": "Artifact hash for asset \\"c96d44225292c4d60ff6f1d3d25c1245f535a1568d1d5e4f96f4537686a6e0f7\\"",
-      "Type": "String",
-    },
-    "AssetParametersc96d44225292c4d60ff6f1d3d25c1245f535a1568d1d5e4f96f4537686a6e0f7S3Bucket4678FB57": Object {
-      "Description": "S3 bucket for asset \\"c96d44225292c4d60ff6f1d3d25c1245f535a1568d1d5e4f96f4537686a6e0f7\\"",
-      "Type": "String",
-    },
-    "AssetParametersc96d44225292c4d60ff6f1d3d25c1245f535a1568d1d5e4f96f4537686a6e0f7S3VersionKey9F562B3C": Object {
-      "Description": "S3 key for asset version \\"c96d44225292c4d60ff6f1d3d25c1245f535a1568d1d5e4f96f4537686a6e0f7\\"",
-      "Type": "String",
-    },
     "AssetParametersd01b2d8959358117de0017e6f18135905e5680cfc8a83e406229c02671c2b34fArtifactHashE68669BA": Object {
       "Description": "Artifact hash for asset \\"d01b2d8959358117de0017e6f18135905e5680cfc8a83e406229c02671c2b34f\\"",
       "Type": "String",
@@ -111,6 +99,18 @@ Object {
     },
     "AssetParametersd01b2d8959358117de0017e6f18135905e5680cfc8a83e406229c02671c2b34fS3VersionKey32DED07C": Object {
       "Description": "S3 key for asset version \\"d01b2d8959358117de0017e6f18135905e5680cfc8a83e406229c02671c2b34f\\"",
+      "Type": "String",
+    },
+    "AssetParametersdf7e631f432bbe3f3902c76d6278ed8bc3d8b05b19032902892c7d98e8cb4d7cArtifactHash743DE67A": Object {
+      "Description": "Artifact hash for asset \\"df7e631f432bbe3f3902c76d6278ed8bc3d8b05b19032902892c7d98e8cb4d7c\\"",
+      "Type": "String",
+    },
+    "AssetParametersdf7e631f432bbe3f3902c76d6278ed8bc3d8b05b19032902892c7d98e8cb4d7cS3Bucket5587CF9E": Object {
+      "Description": "S3 bucket for asset \\"df7e631f432bbe3f3902c76d6278ed8bc3d8b05b19032902892c7d98e8cb4d7c\\"",
+      "Type": "String",
+    },
+    "AssetParametersdf7e631f432bbe3f3902c76d6278ed8bc3d8b05b19032902892c7d98e8cb4d7cS3VersionKey7FD61082": Object {
+      "Description": "S3 key for asset version \\"df7e631f432bbe3f3902c76d6278ed8bc3d8b05b19032902892c7d98e8cb4d7c\\"",
       "Type": "String",
     },
     "SsmParameterValueawsserviceeksoptimizedami118amazonlinux2gpurecommendedimageidC96584B6F00A464EAD1953AFF4B05118Parameter": Object {
@@ -1805,6 +1805,9 @@ set -o xtrace
               "Arn",
             ],
           },
+          "referencetotestingstackClusterVpcC3888E75Ref": Object {
+            "Ref": "ClusterVpcFAA3CEDF",
+          },
           "referencetotestingstackClusterVpcPrivateSubnet1SubnetD2FC8E48Ref": Object {
             "Ref": "ClusterVpcPrivateSubnet1SubnetA4EB481A",
           },
@@ -1826,7 +1829,7 @@ set -o xtrace
               },
               "/",
               Object {
-                "Ref": "AssetParametersc96d44225292c4d60ff6f1d3d25c1245f535a1568d1d5e4f96f4537686a6e0f7S3Bucket4678FB57",
+                "Ref": "AssetParametersdf7e631f432bbe3f3902c76d6278ed8bc3d8b05b19032902892c7d98e8cb4d7cS3Bucket5587CF9E",
               },
               "/",
               Object {
@@ -1836,7 +1839,7 @@ set -o xtrace
                     "Fn::Split": Array [
                       "||",
                       Object {
-                        "Ref": "AssetParametersc96d44225292c4d60ff6f1d3d25c1245f535a1568d1d5e4f96f4537686a6e0f7S3VersionKey9F562B3C",
+                        "Ref": "AssetParametersdf7e631f432bbe3f3902c76d6278ed8bc3d8b05b19032902892c7d98e8cb4d7cS3VersionKey7FD61082",
                       },
                     ],
                   },
@@ -1849,7 +1852,7 @@ set -o xtrace
                     "Fn::Split": Array [
                       "||",
                       Object {
-                        "Ref": "AssetParametersc96d44225292c4d60ff6f1d3d25c1245f535a1568d1d5e4f96f4537686a6e0f7S3VersionKey9F562B3C",
+                        "Ref": "AssetParametersdf7e631f432bbe3f3902c76d6278ed8bc3d8b05b19032902892c7d98e8cb4d7cS3VersionKey7FD61082",
                       },
                     ],
                   },
