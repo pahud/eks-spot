@@ -5,6 +5,7 @@ import { Stack, StackProps, Construct, Resource, ResourceProps, PhysicalName, Fn
 import { LaunchTemplate, ILaunchtemplate } from './launch-template';
 import { renderAmazonLinuxUserData } from './user-data';
 
+
 const DEFAULT_INSTANCE_TYPE = 't3.large';
 
 export enum BlockDuration {
