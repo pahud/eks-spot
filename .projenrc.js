@@ -1,6 +1,6 @@
 const { AwsCdkConstructLibrary } = require('projen');
 
-const AWS_CDK_LATEST_RELEASE = '1.81.0';
+const AWS_CDK_LATEST_RELEASE = '1.82.0';
 const PROJECT_NAME = 'eks-spot-blocks';
 const PROJECT_DESCRIPTION = 'A sample JSII construct lib for AWS CDK';
 const AUTOMATION_TOKEN = 'AUTOMATION_GITHUB_TOKEN';
@@ -25,8 +25,6 @@ const project = new AwsCdkConstructLibrary({
     announce: false,
   },
   cdkVersion: AWS_CDK_LATEST_RELEASE,
-  deps: ['awscdk-81-patch'],
-  peerDeps: ['awscdk-81-patch'],
   cdkDependencies: [
     '@aws-cdk/core',
     '@aws-cdk/aws-ec2',
