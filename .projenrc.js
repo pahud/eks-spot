@@ -3,7 +3,7 @@ const { AwsCdkConstructLibrary } = require('projen');
 const AWS_CDK_LATEST_RELEASE = '1.82.0';
 const PROJECT_NAME = 'eks-spot-blocks';
 const PROJECT_DESCRIPTION = 'A sample JSII construct lib for AWS CDK';
-const AUTOMATION_TOKEN = 'AUTOMATION_GITHUB_TOKEN';
+const AUTOMATION_TOKEN = 'PROJEN_GITHUB_TOKEN';
 
 const project = new AwsCdkConstructLibrary({
   name: PROJECT_NAME,
