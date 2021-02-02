@@ -6,6 +6,7 @@
     "charset": "utf8",
     "declaration": true,
     "experimentalDecorators": true,
+    "incremental": true,
     "inlineSourceMap": true,
     "inlineSources": true,
     "lib": [
@@ -25,7 +26,9 @@
     "strictNullChecks": true,
     "strictPropertyInitialization": true,
     "stripInternal": false,
-    "target": "ES2018"
+    "target": "ES2018",
+    "composite": false,
+    "tsBuildInfoFile": "lib/tsconfig.tsbuildinfo"
   },
   "include": [
     "src/**/*.ts"
