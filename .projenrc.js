@@ -32,8 +32,7 @@ const project = new AwsCdkConstructLibrary({
     '@aws-cdk/aws-iam',
     '@aws-cdk/aws-ssm',
   ],
-
-
+  defaultReleaseBranch: 'master',
   python: {
     distName: 'eks-spot-blocks',
     module: 'eks_spot_blocks',
