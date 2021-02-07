@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.135](https://github.com/pahud/cdk-eks-spotblocks/compare/v0.2.134...v0.2.135) (2021-02-07)
+
 ### [0.2.134](https://github.com/pahud/cdk-eks-spotblocks/compare/v0.2.133...v0.2.134) (2021-02-06)
 
 ### [0.2.133](https://github.com/pahud/cdk-eks-spotblocks/compare/v0.2.132...v0.2.133) (2021-02-05)
