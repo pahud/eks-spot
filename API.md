@@ -135,6 +135,7 @@ addSpotFleet(id: string, props: BaseSpotFleetProps): void
 * **id** (<code>string</code>)  *No description*
 * **props** (<code>[BaseSpotFleetProps](#eks-spot-blocks-basespotfleetprops)</code>)  *No description*
   * **account** (<code>string</code>)  The AWS account ID this resource belongs to. __*Default*__: the resource is in the same account as the stack it belongs to
+  * **environmentFromArn** (<code>string</code>)  ARN to deduce region and account from. __*Default*__: take environment from `account`, `region` parameters, or use Stack environment.
   * **physicalName** (<code>string</code>)  The value passed in by users to the physical name prop of the resource. __*Default*__: The physical name will be allocated by CloudFormation at deployment time
   * **region** (<code>string</code>)  The AWS region this resource belongs to. __*Default*__: the resource is in the same region as the stack it belongs to
   * **blockDuration** (<code>[BlockDuration](#eks-spot-blocks-blockduration)</code>)  *No description* __*Optional*__
@@ -209,6 +210,7 @@ new SpotFleet(scope: Construct, id: string, props: SpotFleetProps)
 * **id** (<code>string</code>)  *No description*
 * **props** (<code>[SpotFleetProps](#eks-spot-blocks-spotfleetprops)</code>)  *No description*
   * **account** (<code>string</code>)  The AWS account ID this resource belongs to. __*Default*__: the resource is in the same account as the stack it belongs to
+  * **environmentFromArn** (<code>string</code>)  ARN to deduce region and account from. __*Default*__: take environment from `account`, `region` parameters, or use Stack environment.
   * **physicalName** (<code>string</code>)  The value passed in by users to the physical name prop of the resource. __*Default*__: The physical name will be allocated by CloudFormation at deployment time
   * **region** (<code>string</code>)  The AWS region this resource belongs to. __*Default*__: the resource is in the same region as the stack it belongs to
   * **blockDuration** (<code>[BlockDuration](#eks-spot-blocks-blockduration)</code>)  *No description* __*Optional*__
@@ -255,6 +257,7 @@ Name | Type | Description
 **bootstrapEnabled**? | <code>boolean</code> | __*Optional*__
 **customAmiId**? | <code>string</code> | __*Optional*__
 **defaultInstanceType**? | <code>[InstanceType](#aws-cdk-aws-ec2-instancetype)</code> | __*Optional*__
+**environmentFromArn**? | <code>string</code> | ARN to deduce region and account from.<br/>__*Default*__: take environment from `account`, `region` parameters, or use Stack environment.
 **instanceInterruptionBehavior**? | <code>[InstanceInterruptionBehavior](#eks-spot-blocks-instanceinterruptionbehavior)</code> | __*Optional*__
 **instanceRole**? | <code>[Role](#aws-cdk-aws-iam-role)</code> | __*Optional*__
 **mapRole**? | <code>boolean</code> | __*Optional*__
@@ -345,6 +348,7 @@ Name | Type | Description
 **bootstrapEnabled**? | <code>boolean</code> | __*Optional*__
 **customAmiId**? | <code>string</code> | __*Optional*__
 **defaultInstanceType**? | <code>[InstanceType](#aws-cdk-aws-ec2-instancetype)</code> | __*Optional*__
+**environmentFromArn**? | <code>string</code> | ARN to deduce region and account from.<br/>__*Default*__: take environment from `account`, `region` parameters, or use Stack environment.
 **instanceInterruptionBehavior**? | <code>[InstanceInterruptionBehavior](#eks-spot-blocks-instanceinterruptionbehavior)</code> | __*Optional*__
 **instanceRole**? | <code>[Role](#aws-cdk-aws-iam-role)</code> | __*Optional*__
 **launchTemplate**? | <code>[ILaunchtemplate](#eks-spot-blocks-ilaunchtemplate)</code> | __*Optional*__
