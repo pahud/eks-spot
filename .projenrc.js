@@ -1,12 +1,12 @@
 const { AwsCdkConstructLibrary, DependenciesUpgradeMechanism } = require('projen');
 
-const AWS_CDK_LATEST_RELEASE = '1.82.0';
 const PROJECT_NAME = 'eks-spot-blocks';
 const PROJECT_DESCRIPTION = 'A sample JSII construct lib for AWS CDK';
 const AUTOMATION_TOKEN = 'PROJEN_GITHUB_TOKEN';
 
 const project = new AwsCdkConstructLibrary({
   name: PROJECT_NAME,
+  cdkVersion: '1.82.0',
   description: PROJECT_DESCRIPTION,
   repository: 'https://github.com/pahud/cdk-eks-spotblocks.git',
   authorName: 'Pahud Hsieh',
@@ -33,7 +33,6 @@ const project = new AwsCdkConstructLibrary({
     twitter: 'pahudnet',
     announce: false,
   },
-  cdkVersion: AWS_CDK_LATEST_RELEASE,
   cdkDependencies: [
     '@aws-cdk/core',
     '@aws-cdk/aws-ec2',
@@ -47,6 +46,9 @@ const project = new AwsCdkConstructLibrary({
   },
 });
 
+project.package.addField('resolutions', {
+  'trim-newlines': '3.0.1',
+});
 
 const common_exclude = ['cdk.out', 'cdk.context.json', 'images', 'yarn-error.log'];
 project.npmignore.exclude(...common_exclude);
